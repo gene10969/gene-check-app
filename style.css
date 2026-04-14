@@ -505,3 +505,19 @@ button::after {
 #adminButtons.admin-visible{
   display:flex !important;
 }
+
+
+/* robust admin lock visibility */
+#adminToolbar[hidden],
+#adminButtons[hidden]{
+  display:none !important;
+}
+#adminToolbar.admin-visible{
+  display:grid !important;
+}
+#adminButtons.admin-visible{
+  display:flex !important;
+}
+#adminLockedView{
+  display:grid;
+}

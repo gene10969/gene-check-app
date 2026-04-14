@@ -45,7 +45,7 @@
           <span>管理者メニュー</span>
           <button id="adminLogoutBtn" class="btn btn-sub admin-logout hidden" type="button">管理者を閉じる</button>
         </div>
-        <div id="adminLockedView" class="admin-locked-view">
+        <div id="adminLockedView" class="admin-locked-view" style="display:grid">
           <p class="admin-note">保存済み患者検索・保存・書き出し・読み込みは管理者専用です。</p>
           <div class="admin-auth-row">
             <input id="adminPassword" type="password" class="admin-password-input" placeholder="管理者パスワード">
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="toolbar-grid admin-only" id="adminToolbar" hidden>
+      <div class="toolbar-grid admin-only" id="adminToolbar" hidden style="display:none">
         <label class="field search-field">
           <span>保存済み患者検索</span>
           <input id="patientSearch" type="text" placeholder="名前を入力">
@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <div class="button-row admin-only" id="adminButtons" hidden>
+      <div class="button-row admin-only" id="adminButtons" hidden style="display:none">
         <button id="installBtn" class="btn btn-sub hidden" type="button">ホーム画面に追加</button>
         <button id="saveBtn" class="btn btn-main" type="button">患者データを保存</button>
         <button id="exportBtn" class="btn btn-sub" type="button">JSON書き出し</button>
@@ -94,7 +94,7 @@
 
       <div class="button-row">
         <button id="resetBtn" class="btn btn-sub" type="button">新規入力</button>
-        <button id="resultBtn" class="btn btn-main" type="button">集計を見る</button>
+        <button id="resultBtn" class="btn btn-main admin-only" type="button" hidden style="display:none">集計を見る</button>
       </div>
 
       <p id="statusText" class="status-text">準備完了</p>

@@ -414,110 +414,416 @@ button::after {
 }
 
 
-/* admin lock */
-.admin-auth-panel{
-  margin-top:14px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(0,0,0,0.72);
-  padding:14px;
+/* admin lock verified */
+[hidden]{display:none !important;}
+.admin-auth-panel{margin-top:14px;border:1px solid var(--line);border-radius:18px;background:rgba(0,0,0,0.82) !important;padding:14px;}
+.admin-auth-head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--gold);margin-bottom:10px;}
+.admin-locked-view{display:grid;gap:10px;}
+.admin-note,.admin-auth-status{margin:0;color:var(--muted);font-size:13px;line-height:1.7;}
+.admin-auth-row{display:flex;gap:10px;flex-wrap:wrap;}
+.admin-password-input{flex:1 1 260px;min-height:48px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,0.82) !important;color:var(--text);padding:0 14px;font:inherit;}
+#adminToolbar.admin-visible{display:grid !important;}
+#adminButtons.admin-visible{display:flex !important;}
+#resultBtn.admin-visible{display:inline-flex !important;}
+@media (max-width:640px){.admin-auth-row{display:grid;grid-template-columns:1fr;}}
+
+
+/* admin section moved to bottom */
+.admin-section-wrap{
+  margin-top:16px;
 }
-.admin-auth-head{
-  display:flex;
+#adminSummary.admin-visible{
+  display:grid !important;
+}
+
+
+/* admin menu bottom placement */
+.admin-bottom-panel{
+  margin-top:16px;
+}
+#adminSummary.admin-visible{
+  display:grid !important;
+}
+#adminToolbar.admin-visible{
+  display:grid !important;
+}
+#adminButtons.admin-visible{
+  display:flex !important;
+}
+#resultBtn.admin-visible{
+  display:inline-flex !important;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  color:var(--gold);
-  margin-bottom:10px;
 }
-.admin-locked-view{
+
+
+/* detailed analysis */
+.analysis-grid{
+  display:grid;
+  grid-template-columns:minmax(320px, 420px) minmax(0, 1fr);
+  gap:18px;
+  align-items:start;
+}
+.donut-wrap{
+  border:1px solid rgba(217,193,126,.18);
+  border-radius:18px;
+  padding:14px;
+  background:rgba(255,255,255,.02);
+}
+#donutChart{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.analysis-text{
+  display:grid;
+  gap:14px;
+}
+.analysis-block{
+  border:1px solid rgba(217,193,126,.18);
+  border-radius:18px;
+  padding:14px 16px;
+  background:rgba(255,255,255,.02);
+}
+.analysis-block h4{
+  margin:0 0 10px;
+  color:var(--gold);
+  font-size:18px;
+}
+.analysis-block p{
+  margin:0;
+  line-height:1.95;
+}
+.top-category-list{
   display:grid;
   gap:10px;
 }
-.admin-note,
-.admin-auth-status{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
-}
-.admin-auth-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.admin-password-input{
-  flex:1 1 260px;
-  min-height:48px;
+.top-category-item{
+  border:1px solid rgba(217,193,126,.18);
   border-radius:14px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,0.82);
-  color:var(--text);
-  padding:0 14px;
-  font:inherit;
+  padding:10px 12px;
+  background:rgba(0,0,0,.35);
 }
-.admin-only{
-  display:none !important;
+.top-category-item strong{
+  color:var(--gold);
+  display:block;
+  margin-bottom:4px;
 }
-.admin-only.admin-visible{
-  display:grid !important;
+.top-category-item span{
+  display:block;
+  color:var(--muted);
+  line-height:1.8;
 }
-.button-row.admin-only.admin-visible{
-  display:flex !important;
-}
-.admin-logout{
-  min-width:140px;
-}
-@media (max-width:640px){
-  .admin-auth-row{
-    display:grid;
+@media (max-width:980px){
+  .analysis-grid{
     grid-template-columns:1fr;
   }
 }
 
 
-/* admin lock fix */
-[hidden] { display: none !important; }
-.admin-auth-panel{
-  margin-top:14px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(0,0,0,0.82) !important;
-  padding:14px;
+/* clean rebuilt layout */
+.admin-bottom-panel{ margin-top:16px; }
+#adminSummary.admin-visible{ display:grid !important; }
+#adminToolbar.admin-visible{ display:grid !important; }
+#adminButtons.admin-visible{ display:flex !important; }
+#resultBtn.admin-visible{ display:inline-flex !important; align-items:center; }
+.analysis-grid{ display:grid; grid-template-columns:minmax(320px,420px) minmax(0,1fr); gap:18px; align-items:start; }
+.donut-wrap{ border:1px solid rgba(217,193,126,.18); border-radius:18px; padding:14px; background:rgba(255,255,255,.02); }
+#donutChart{ width:100%; height:auto; display:block; }
+.analysis-text{ display:grid; gap:14px; }
+.analysis-block{ border:1px solid rgba(217,193,126,.18); border-radius:18px; padding:14px 16px; background:rgba(255,255,255,.02); }
+.analysis-block h4{ margin:0 0 10px; color:var(--gold); font-size:18px; }
+.analysis-block p{ margin:0; line-height:1.95; }
+.top-category-list{ display:grid; gap:10px; }
+.top-category-item{ border:1px solid rgba(217,193,126,.18); border-radius:14px; padding:10px 12px; background:rgba(0,0,0,.35); }
+.top-category-item strong{ color:var(--gold); display:block; margin-bottom:4px; }
+.top-category-item span{ display:block; color:var(--muted); line-height:1.8; }
+@media (max-width:980px){ .analysis-grid{ grid-template-columns:1fr; } }
+
+
+/* ===== complete ink-saving print layout ===== */
+.print-only{display:none;}
+
+@media print{
+  @page{size:A4 portrait;margin:12mm;}
+
+  html,body{
+    width:auto !important;
+    min-height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+    color:#000 !important;
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif !important;
+    -webkit-print-color-adjust:economy !important;
+    print-color-adjust:economy !important;
+  }
+
+
+  *,*::before,*::after{
+    box-sizing:border-box !important;
+  }
+
+  .print-only,
+  .print-report-inner,
+  .print-section,
+  .print-table,
+  .print-basic-grid,
+  .print-compare-grid{
+    max-width:100% !important;
+    overflow:visible !important;
+  }
+
+  .print-table{
+    table-layout:fixed !important;
+  }
+
+  .print-table th,
+  .print-table td{
+    word-break:break-word !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  body::before,
+  body::after,
+  .splash,
+  .app,
+  canvas,
+  img,
+  .hero,
+  .top-panel,
+  .admin-bottom-panel,
+  .category-container,
+  .button-row,
+  .chart-card,
+  .history-card,
+  .selected-card,
+  .info-card,
+  .no-print{
+    display:none !important;
+  }
+
+  .print-only{
+    display:block !important;
+    background:#fff !important;
+    color:#000 !important;
+  }
+
+  .print-report-inner{
+    width:96% !important;
+    max-width:180mm !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+    background:#fff !important;
+    color:#000 !important;
+  }
+
+  .print-report-header{
+    border-bottom:2px solid #111 !important;
+    padding:0 0 5mm !important;
+    margin:0 0 5mm !important;
+  }
+
+  .print-report-header div{
+    font-size:10pt !important;
+    letter-spacing:.08em !important;
+    margin:0 0 2mm !important;
+  }
+
+  .print-report-header h1{
+    font-size:18pt !important;
+    line-height:1.25 !important;
+    margin:0 !important;
+    color:#000 !important;
+  }
+
+  .print-basic-grid,
+  .print-compare-grid{
+    display:grid !important;
+    grid-template-columns:1fr 1fr 1fr 1fr !important;
+    gap:0 !important;
+    border-top:1px solid #333 !important;
+    border-left:1px solid #333 !important;
+    margin:0 0 5mm !important;
+  }
+
+  .print-basic-grid div,
+  .print-compare-grid div{
+    border-right:1px solid #333 !important;
+    border-bottom:1px solid #333 !important;
+    padding:2.2mm 2.5mm !important;
+    min-height:13mm !important;
+    background:#fff !important;
+  }
+
+  .print-basic-grid span,
+  .print-compare-grid span{
+    display:block !important;
+    font-size:8pt !important;
+    color:#333 !important;
+    margin:0 0 1.5mm !important;
+  }
+
+  .print-basic-grid strong,
+  .print-compare-grid strong{
+    display:block !important;
+    font-size:12pt !important;
+    color:#000 !important;
+    font-weight:700 !important;
+  }
+
+  .print-section{
+    margin:0 0 5mm !important;
+    padding:0 !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+    background:#fff !important;
+    color:#000 !important;
+  }
+
+  .print-section h2{
+    font-size:12pt !important;
+    line-height:1.35 !important;
+    margin:0 0 2mm !important;
+    padding:1.5mm 2mm !important;
+    color:#000 !important;
+    border-left:4px solid #000 !important;
+    border-bottom:1px solid #999 !important;
+    background:#f3f3f3 !important;
+  }
+
+  .print-section p{
+    font-size:9.5pt !important;
+    line-height:1.65 !important;
+    margin:0 !important;
+    color:#000 !important;
+  }
+
+  .print-table{
+    width:100% !important;
+    border-collapse:collapse !important;
+    font-size:9pt !important;
+    background:#fff !important;
+    color:#000 !important;
+  }
+
+  .print-table th,
+  .print-table td{
+    border:1px solid #555 !important;
+    padding:1.7mm 2mm !important;
+    text-align:left !important;
+    vertical-align:top !important;
+    color:#000 !important;
+    background:#fff !important;
+  }
+
+  .print-table th{
+    font-weight:700 !important;
+    background:#f3f3f3 !important;
+  }
+
+  .print-selected-items{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:3mm !important;
+  }
+
+  .print-selected-group{
+    border:1px solid #555 !important;
+    padding:2mm 2.5mm !important;
+    background:#fff !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  .print-selected-group h3{
+    font-size:10pt !important;
+    margin:0 0 1.5mm !important;
+    padding:0 0 1mm !important;
+    border-bottom:1px solid #aaa !important;
+    color:#000 !important;
+  }
+
+  .print-selected-group ul{
+    margin:0 !important;
+    padding-left:5mm !important;
+    line-height:1.55 !important;
+    font-size:9pt !important;
+    color:#000 !important;
+  }
+
+  .print-footer{
+    margin-top:5mm !important;
+    padding-top:2mm !important;
+    border-top:1px solid #999 !important;
+    color:#555 !important;
+    font-size:8pt !important;
+  }
 }
-.admin-auth-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.admin-password-input{
-  flex:1 1 260px;
-  min-height:48px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,0.82) !important;
-  color:var(--text);
-  padding:0 14px;
-}
-#adminToolbar.admin-visible{
-  display:grid !important;
-}
-#adminButtons.admin-visible{
-  display:flex !important;
+
+/* ===== print donut chart addition ===== */
+@media print{
+  .print-chart-section{
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  .print-chart-layout{
+    display:grid !important;
+    grid-template-columns:54mm 1fr !important;
+    gap:5mm !important;
+    align-items:center !important;
+    border:1px solid #555 !important;
+    padding:3mm !important;
+    background:#fff !important;
+    color:#000 !important;
+  }
+
+  #printDonutChart{
+    display:block !important;
+    width:50mm !important;
+    height:50mm !important;
+    max-width:50mm !important;
+    max-height:50mm !important;
+    background:#fff !important;
+    border:1px solid #777 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    print-color-adjust:economy !important;
+    -webkit-print-color-adjust:economy !important;
+  }
+
+  .print-chart-note{
+    font-size:9pt !important;
+    line-height:1.6 !important;
+    color:#000 !important;
+  }
+
+  .print-chart-note strong{
+    display:block !important;
+    font-size:10pt !important;
+    margin-bottom:1.5mm !important;
+  }
+
+  .print-chart-note p{
+    margin:0 !important;
+    font-size:9pt !important;
+    line-height:1.65 !important;
+  }
 }
 
 
-/* robust admin lock visibility */
-#adminToolbar[hidden],
-#adminButtons[hidden]{
-  display:none !important;
-}
-#adminToolbar.admin-visible{
-  display:grid !important;
-}
-#adminButtons.admin-visible{
-  display:flex !important;
-}
-#adminLockedView{
-  display:grid;
+/* =========================
+   SAFE TABLET TOUCH SUPPORT
+   表示・選択処理に干渉しない安全調整
+========================= */
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+  html { -webkit-text-size-adjust: 100%; }
+  body { touch-action: manipulation; }
+  input, select, textarea, button { font-size: 16px; }
+  button, .btn { min-height: 44px; }
+  input[type="checkbox"], input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+  }
 }

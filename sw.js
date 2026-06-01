@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-stable-v20260507-03';
+const CACHE_NAME = 'gene-check-medical-tcm-v20260602-01';
 const ASSETS = [
   './',
   './index.html',

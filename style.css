@@ -829,44 +829,8 @@ button::after {
 }
 
 
-/* medical / TCM analysis extension */
-.symptom-link-list,
-.print-symptom-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.symptom-link-chip{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:7px 12px;
-  border:1px solid rgba(217,193,126,.45);
-  border-radius:999px;
-  color:#f5e7bd;
-  background:rgba(217,193,126,.08);
-  text-decoration:none;
-  font-size:13px;
-  line-height:1.4;
-}
-.symptom-link-chip:hover{
-  border-color:rgba(217,193,126,.8);
-  background:rgba(217,193,126,.16);
-}
-.clinical-block p{
-  line-height:1.9;
-}
-@media print{
-  .symptom-link-list,
-  .print-symptom-links{
-    gap:4px;
-  }
-  .symptom-link-chip{
-    color:#000 !important;
-    background:#fff !important;
-    border:1px solid #999 !important;
-    padding:3px 7px !important;
-    border-radius:12px !important;
-    font-size:10.5pt !important;
-  }
-}
+/* =====================================================
+   gene advanced report styles
+===================================================== */
+.gene-advanced-report{display:grid;gap:18px;margin-top:22px}.advanced-card{border:1px solid rgba(217,193,126,.30);border-radius:22px;background:rgba(255,255,255,.045);padding:20px;box-shadow:0 18px 40px rgba(0,0,0,.25)}.advanced-card h3{margin:0 0 14px;color:#f5f0df}.advanced-grid{display:grid;grid-template-columns:180px repeat(3,minmax(0,1fr));gap:14px}.advanced-score,.advanced-type,.treatment-item,.lifestyle-item,.food-item{border:1px solid rgba(217,193,126,.22);border-radius:18px;background:rgba(0,0,0,.20);padding:14px;line-height:1.75}.advanced-score{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.advanced-score small{color:rgba(245,240,223,.72)}.advanced-score strong{font-size:48px;color:#d9c17e;line-height:1}.advanced-score span{color:#f5f0df}.advanced-type h4,.treatment-item h4,.lifestyle-item h4,.food-item h4{margin:0 0 8px;color:#d9c17e}.advanced-type p,.treatment-item p,.food-item p{margin:6px 0;color:rgba(245,240,223,.86)}.hp-link-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.hp-link{display:flex;flex-direction:column;gap:4px;border:1px solid rgba(217,193,126,.28);border-radius:16px;background:rgba(217,193,126,.08);padding:14px;text-decoration:none;color:#f5f0df}.hp-link strong{color:#d9c17e}.hp-link span{font-size:13px;color:rgba(245,240,223,.70)}.treatment-list,.lifestyle-list,.food-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lifestyle-item ul,.check-list{margin:8px 0 0;padding-left:1.2em;color:rgba(245,240,223,.86);line-height:1.8}.food-item span{display:inline-block;margin-top:8px;font-size:12px;color:#d9c17e;border:1px solid rgba(217,193,126,.35);border-radius:999px;padding:4px 10px}.gene-disclaimer{font-size:12px;line-height:1.8;color:rgba(245,240,223,.62);margin:4px 4px 0}@media(max-width:900px){.advanced-grid{grid-template-columns:1fr}.hp-link-grid,.treatment-list,.lifestyle-list,.food-list{grid-template-columns:1fr}.advanced-card{padding:16px}}
+@media print{.gene-advanced-report{display:block!important}.advanced-card,.advanced-score,.advanced-type,.treatment-item,.lifestyle-item,.food-item{background:#fff!important;color:#000!important;border:1px solid #bbb!important;box-shadow:none!important}.advanced-card h3,.advanced-type h4,.treatment-item h4,.lifestyle-item h4,.food-item h4,.advanced-score strong,.hp-link strong{color:#000!important}.advanced-type p,.treatment-item p,.food-item p,.lifestyle-item li,.check-list li{color:#000!important}.hp-link-grid,.advanced-grid,.treatment-list,.lifestyle-list,.food-list{display:block!important}.hp-link{background:#fff!important;color:#000!important;border:1px solid #bbb!important;margin:0 0 6px;text-decoration:none}.gene-disclaimer{color:#000!important}.advanced-card{break-inside:avoid;page-break-inside:avoid;margin-bottom:8px;padding:10px}.print-section p{line-height:1.55}}

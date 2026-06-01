@@ -41,10 +41,6 @@ const refs = {
   analysisSummary: $('analysisSummary'),
   topCategoryList: $('topCategoryList'),
   comparisonSummary: $('comparisonSummary'),
-  hpSymptomLinks: $('hpSymptomLinks'),
-  medicalInterpretation: $('medicalInterpretation'),
-  tcmPatternText: $('tcmPatternText'),
-  treatmentViewText: $('treatmentViewText'),
   historyList: $('historyList'),
   historyMeta: $('historyMeta'),
   selectedList: $('selectedList'),
@@ -354,197 +350,6 @@ function renderSelectedList(selectedSet = state.selected) {
 }
 
 
-const symptomKnowledgeBase = [
-  {
-    title:'めまい',
-    url:'https://gene-seitai.com/dizziness.html',
-    keywords:['めまいがする','立ちくらみがある','ふらつく感じがある','耳鳴りがする','頭がぼーっとする','息苦しさを感じることがある','動悸がする'],
-    medical:'前庭—自律神経連関、頸性要素、起立時循環調節、過換気傾向、交感神経過活動の関与を確認します。',
-    tcm:'肝陽上亢、痰湿中阻、気血不足、腎精不足を鑑別し、のぼせ型・疲労型・胃腸虚弱型に分けて見ます。',
-    treatment:'後頭下筋群、上部頸椎、胸郭入口部、横隔膜、足部接地を確認し、督脈・膀胱経・肝経・腎経の反応を見ながら刺激量を抑えて整えます。'
-  },
-  {
-    title:'不眠',
-    url:'https://gene-seitai.com/insomnia.html',
-    keywords:['寝つきが悪い','夜中に目が覚める','朝早く目が覚めてしまう','眠りが浅い','夢をよく見る','寝てもスッキリしない','理由のない緊張感がある'],
-    medical:'過覚醒、睡眠覚醒リズムの乱れ、交感神経優位、呼吸の浅さ、頸胸部筋緊張による休息反応の低下を確認します。',
-    tcm:'心脾両虚、肝鬱化火、陰虚火旺、痰熱内擾を中心に、眠りの浅さ・中途覚醒・夢の多さの出方で整理します。',
-    treatment:'後頭部、頸胸移行部、胸椎、肋骨、横隔膜、腹部の緊張をゆるめ、任脈・心包経・脾経・腎経を意識して休息へ移行しやすい状態を作ります。'
-  },
-  {
-    title:'頭痛',
-    url:'https://gene-seitai.com/headache.html',
-    keywords:['頭痛がする','頭が締め付けられる感じがする','首こりがある','肩こりがある','目が疲れやすい','光がまぶしく感じる','天候や気圧の変化で体調が変わる'],
-    medical:'頸性頭痛、筋緊張性頭痛様の要素、眼精疲労、三叉神経—頸部連関、呼吸性筋緊張、自律神経性血管反応を確認します。',
-    tcm:'肝鬱気滞、肝陽上亢、瘀血、気血不足、痰湿を見立て、側頭部・後頭部・締め付け感など部位と性質で整理します。',
-    treatment:'後頭下筋群、側頭筋、咬筋、胸鎖乳突筋、肩甲帯、胸郭を確認し、胆経・膀胱経・督脈・肝経の緊張連鎖を整えます。'
-  },
-  {
-    title:'動悸',
-    url:'https://gene-seitai.com/palpitation.html',
-    keywords:['動悸がする','脈が乱れる感じがある','胸が苦しくなることがある','息切れしやすい','血圧が不安定だと感じる','不安を感じやすい'],
-    medical:'心拍知覚過敏、交感神経活動亢進、呼吸パターン異常、胸郭可動性低下、圧受容器反射の不安定さを確認します。',
-    tcm:'心気虚、心血虚、心脾両虚、肝鬱気滞、痰飲を鑑別し、不安感・息切れ・疲労の有無で整理します。',
-    treatment:'胸郭、胸骨周囲、肋間、横隔膜、背部上位胸椎を確認し、心包経・任脈・膀胱経を中心に呼吸と循環の負担を下げる方向で整えます。'
-  },
-  {
-    title:'パニック症状・不安障害',
-    url:'https://gene-seitai.com/anxiety-disorder.html',
-    keywords:['不安を感じやすい','理由のない緊張感がある','人前で緊張しやすい','外出が不安になることがある','息が吸いにくい','深呼吸がしづらい','胸が苦しくなることがある'],
-    medical:'予期不安、過換気傾向、身体感覚への過敏化、交感神経優位、扁桃体—自律神経系の過反応を確認します。',
-    tcm:'肝気鬱結、心神不寧、痰気交阻、心脾両虚を中心に、胸の詰まり・喉の違和感・不安感の連動で見ます。',
-    treatment:'胸郭、横隔膜、喉周囲、後頭部、みぞおちの緊張を確認し、任脈・心包経・肝経・脾経を意識して過緊張を鎮める刺激量で調整します。'
-  },
-  {
-    title:'起立性調節障害',
-    url:'https://gene-seitai.com/orthostatic-dysregulation.html',
-    keywords:['朝起きるのがつらい','立ちくらみがある','ふらつく感じがある','休んでも疲れが取れない','体が重だるい','血圧が不安定だと感じる','寒暖差に弱い'],
-    medical:'起立時循環調節、圧受容器反射、自律神経切り替え、下肢静脈還流、頸胸部緊張、呼吸浅化の影響を確認します。',
-    tcm:'気虚、陽虚、腎虚、脾虚、痰湿を中心に、朝の弱さ・冷え・倦怠感・ふらつきの組み合わせで整理します。',
-    treatment:'下腿、足部、骨盤、腹部、横隔膜、頸胸移行部を確認し、腎経・脾経・胃経・督脈を意識して循環と姿勢保持の土台を整えます。'
-  },
-  {
-    title:'過敏性腸症候群',
-    url:'https://gene-seitai.com/ibs.html',
-    keywords:['お腹が張りやすい','便秘になりやすい','下痢をしやすい','便秘と下痢を繰り返す','緊張するとお腹の症状が出やすい','食欲がない'],
-    medical:'脳腸相関、内臓知覚過敏、腸管運動の不安定性、ストレス反応、横隔膜と腹圧調整を確認します。',
-    tcm:'肝脾不和、脾虚、湿困脾胃、気滞、寒熱錯雑を見立て、便秘型・下痢型・交替型に分けて整理します。',
-    treatment:'腹部、みぞおち、背部胸腰移行部、骨盤、横隔膜を確認し、脾経・胃経・肝経・任脈を中心に腹部内圧と呼吸の連動を整えます。'
-  },
-  {
-    title:'慢性便秘',
-    url:'https://gene-seitai.com/chronic-constipation.html',
-    keywords:['便秘になりやすい','お腹が張りやすい','食欲がない','胃もたれしやすい','体が重だるい','運動不足を感じる'],
-    medical:'腸管運動低下、腹圧低下、骨盤底・横隔膜の協調性、交感神経優位による消化管活動低下を確認します。',
-    tcm:'気虚便秘、気滞便秘、血虚便秘、冷えによる陽虚便秘を鑑別し、腹部の張り・冷え・疲労の有無で整理します。',
-    treatment:'下腹部、骨盤、腰背部、横隔膜、股関節を確認し、大腸経・胃経・脾経・任脈の流れを意識して排出リズムを整えます。'
-  },
-  {
-    title:'胃の不快感・機能性ディスペプシア',
-    url:'https://gene-seitai.com/stomach-discomfort.html',
-    keywords:['胃もたれしやすい','胃の不快感がある','吐き気を感じることがある','食欲がない','食後に苦しくなる','みぞおちが重い'],
-    medical:'胃運動低下、内臓知覚過敏、脳腸相関、迷走神経機能、背部緊張、ストレス反応を確認します。',
-    tcm:'脾胃虚弱、肝胃不和、気滞、痰湿、胃寒を中心に、食後症状・みぞおちの重さ・吐き気で整理します。',
-    treatment:'みぞおち、腹部、背部中下部、横隔膜、肋骨下縁を確認し、胃経・脾経・肝経・任脈を意識して胃の働きやすい体勢へ整えます。'
-  },
-  {
-    title:'吐き気',
-    url:'https://gene-seitai.com/nausea.html',
-    keywords:['吐き気を感じることがある','胃の不快感がある','乗り物酔いしやすい','めまいがする','喉が詰まる感じがする','食欲がない'],
-    medical:'前庭—自律神経反射、胃運動低下、迷走神経反応、過換気、頸部緊張、ストレス性悪心を確認します。',
-    tcm:'胃気上逆、肝胃不和、痰湿、脾胃虚弱を中心に、めまい・胃部不快・喉の詰まりの併発で整理します。',
-    treatment:'みぞおち、横隔膜、頸部、後頭部、腹部を確認し、任脈・胃経・脾経・肝経の反応を見ながら胃気を下げる方向で調整します。'
-  },
-  {
-    title:'息苦しさ',
-    url:'https://gene-seitai.com/breathing-difficulty.html',
-    keywords:['息が吸いにくい','深呼吸がしづらい','息苦しさを感じることがある','胸が苦しくなることがある','首こりがある','背中が張りやすい'],
-    medical:'呼吸パターン障害、胸郭可動性低下、横隔膜機能低下、過換気傾向、交感神経優位を確認します。',
-    tcm:'肺気不宣、肝気鬱結、気滞、痰湿、腎不納気を見立て、吸いにくさ・胸の詰まり・不安感の関係を整理します。',
-    treatment:'胸郭、肋間、横隔膜、頸部前面、背部上位胸椎を確認し、肺経・任脈・肝経・腎経を意識して呼吸の通りを整えます。'
-  },
-  {
-    title:'喉の違和感',
-    url:'https://gene-seitai.com/throat-discomfort.html',
-    keywords:['喉が詰まる感じがする','飲み込みにくさを感じる','口が渇きやすい','息が吸いにくい','理由のない緊張感がある','不安を感じやすい'],
-    medical:'咽喉頭異常感、頸部筋緊張、嚥下関連筋の過緊張、ストレス反応、呼吸パターン異常を確認します。',
-    tcm:'梅核気、肝気鬱結、痰気交阻、陰虚を中心に、喉の詰まり・胸の詰まり・不安感の連動で見ます。',
-    treatment:'舌骨周囲、胸鎖乳突筋、前頸部、胸郭入口部、みぞおちを確認し、任脈・肝経・肺経を意識して上焦の詰まりを緩めます。'
-  },
-  {
-    title:'アトピー・皮膚症状',
-    url:'https://gene-seitai.com/atopy.html',
-    keywords:['皮膚がかゆくなりやすい','湿疹や肌荒れが出やすい','肌が乾燥しやすい','浸出液が出る','皮膚がポロポロと落ちる','寝汗をかく','顔がほてりやすい'],
-    medical:'皮膚バリア機能、掻痒—掻破サイクル、睡眠低下、ストレス応答、神経免疫反応、発汗・体温調整を確認します。',
-    tcm:'血熱、血虚風燥、湿熱、脾虚湿盛、陰虚内熱を中心に、乾燥型・滲出型・熱感型で整理します。',
-    treatment:'背部、胸郭、腹部、頸部、皮膚緊張、睡眠状態を確認し、肺経・脾経・肝経・腎経を意識して熱・湿・乾燥の偏りを整えます。'
-  },
-  {
-    title:'冷え性・PMS',
-    url:'https://gene-seitai.com/cold-sensitivity.html',
-    keywords:['手足や体が冷えやすい','寒暖差に弱い','生理周期が乱れやすい','生理痛が強い','生理前に体調が大きく崩れる','のぼせやすい'],
-    medical:'末梢循環、体温調整、自律神経性血管反応、骨盤内循環、ホルモン周期に伴う反応性を確認します。',
-    tcm:'陽虚、気血不足、瘀血、肝鬱、腎虚を中心に、冷え・のぼせ・月経前症状の出方で整理します。',
-    treatment:'骨盤、下腹部、腰仙部、下腿内側、足部を確認し、腎経・脾経・肝経・任脈を意識して下焦の巡りと熱産生を整えます。'
-  },
-  {
-    title:'顎関節症・腱鞘炎・足底筋膜炎',
-    url:'https://gene-seitai.com/menu.html',
-    keywords:['顎関節症','腱鞘炎','足底筋膜炎','手足がしびれることがある','体がこわばりやすい','肩こりがある','腰に違和感がある'],
-    medical:'局所負荷だけでなく、姿勢制御、筋膜連鎖、末梢神経の滑走性、交感神経性筋緊張、反復負荷を確認します。',
-    tcm:'気滞血瘀、寒湿、肝血不足、腎虚を背景に、痛みの部位・冷え・こわばり・反復動作の影響で整理します。',
-    treatment:'患部のみでなく、頸胸部、肩甲帯、骨盤、足部、前腕ラインを確認し、経筋の連動と荷重バランスを整えます。'
-  }
-];
-
-function getClinicalTone(breakdown, total){
-  const active = breakdown.filter(v => v.selected > 0).sort((a,b)=>b.selected-a.selected || b.ratio-a.ratio);
-  if (!active.length) return '現時点では選択項目がないため、医学的な傾向判定は行っていません。';
-  const names = active.slice(0,4).map(v=>`${v.name}${v.selected}項目`).join('、');
-  const has = (n)=>active.some(v=>v.name===n);
-  const phrases = [];
-  if (has('睡眠') || has('精神・感情')) phrases.push('交感神経優位・過覚醒・HPA軸ストレス反応');
-  if (has('頭・神経系')) phrases.push('前庭—自律神経連関、頸部固有感覚、頭頸部筋緊張');
-  if (has('心臓・血圧・循環') || has('呼吸')) phrases.push('心肺自律神経反応、呼吸パターン異常、胸郭可動性低下');
-  if (has('消化器')) phrases.push('脳腸相関、内臓知覚過敏、迷走神経機能');
-  if (has('皮膚・発汗')) phrases.push('神経免疫反応、皮膚バリア、発汗・体温調整');
-  if (has('筋肉・関節')) phrases.push('筋膜性緊張、姿勢制御、交感神経性筋緊張');
-  if (!phrases.length) phrases.push('自律神経による全身調整負担');
-  return `選択分布は ${names} が中心です。医学的には、${phrases.join('、')} などを背景要因として確認する構成です。これは診断ではなく、施術前に身体反応を整理するための見立てです。`;
-}
-
-function getMatchedSymptomInsights(selectedSet){
-  const selected = Array.from(selectedSet || []);
-  return symptomKnowledgeBase.map(info => {
-    let score = 0;
-    selected.forEach(item => {
-      info.keywords.forEach(key => {
-        if (item === key || item.includes(key) || key.includes(item)) score += item === key ? 3 : 1;
-      });
-    });
-    return {...info, score};
-  }).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,5);
-}
-
-function buildHpSymptomLinks(insights){
-  if (!insights.length) return '<div class="top-category-item"><span>該当する症状ページ候補はまだありません。</span></div>';
-  return insights.map(v => `<a class="symptom-link-chip" href="${v.url}" target="_blank" rel="noopener">${v.title}</a>`).join('');
-}
-
-function buildMedicalInterpretationText(breakdown, selectedSet){
-  const insights = getMatchedSymptomInsights(selectedSet);
-  const base = getClinicalTone(breakdown, Array.from(selectedSet || []).length);
-  if (!insights.length) return base;
-  const detail = insights.slice(0,3).map(v => `【${v.title}】${v.medical}`).join(' ');
-  return `${base} 関連症状ページの内容と照合すると、${detail}`;
-}
-
-function buildTcmPatternText(selectedSet){
-  const insights = getMatchedSymptomInsights(selectedSet);
-  if (!insights.length) return '東洋医学的には、気血水・五臓・寒熱・虚実の偏りを問診と触診で確認します。症状名だけで決めつけず、脈・腹部・呼吸・皮膚緊張・姿勢の反応を合わせて見立てます。';
-  return insights.slice(0,4).map(v => `【${v.title}】${v.tcm}`).join(' ');
-}
-
-function buildTreatmentViewText(selectedSet){
-  const insights = getMatchedSymptomInsights(selectedSet);
-  if (!insights.length) return '施術では、首肩だけでなく、呼吸・腹部・背部・骨盤・足部まで確認し、身体が防御反応を起こしにくい刺激量で調整します。';
-  const main = insights.slice(0,4).map(v => `【${v.title}】${v.treatment}`).join(' ');
-  return `${main} 共通して、強い矯正ではなく、呼吸・循環・筋緊張・内臓反応が落ち着く範囲で全身の連動を整えます。`;
-}
-
-function renderClinicalBlocks(breakdown, selectedSet){
-  const insights = getMatchedSymptomInsights(selectedSet);
-  if (refs.hpSymptomLinks) refs.hpSymptomLinks.innerHTML = buildHpSymptomLinks(insights);
-  if (refs.medicalInterpretation) refs.medicalInterpretation.textContent = buildMedicalInterpretationText(breakdown, selectedSet);
-  if (refs.tcmPatternText) refs.tcmPatternText.textContent = buildTcmPatternText(selectedSet);
-  if (refs.treatmentViewText) refs.treatmentViewText.textContent = buildTreatmentViewText(selectedSet);
-}
-
-function setPrintHtml(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = value || '-';
-}
-
 function getCategoryBreakdown(selectedSet = state.selected){
   return categories.map(c => {
     const selected = c.items.filter(item => selectedSet.has(item)).length;
@@ -555,14 +360,16 @@ function getCategoryBreakdown(selectedSet = state.selected){
 function buildSummaryText(breakdown, total){
   const active = breakdown.filter(x => x.selected > 0).sort((a,b) => b.selected - a.selected || b.ratio - a.ratio);
   if (!active.length) {
-    return 'まだ選択項目がないため、自律神経・呼吸・循環・消化・睡眠との関連を含む詳細分析は表示されていません。';
+    return 'まだ選択項目がないため、自律神経との関連を含む詳細分析は表示されていません。';
   }
   const names = active.slice(0,3).map(v => `${v.name}（${v.selected}項目）`).join('、');
-  const selectedSet = state.selected || new Set();
-  const insights = getMatchedSymptomInsights(selectedSet).slice(0,3).map(v=>v.title).join('、');
-  const clinical = getClinicalTone(breakdown, total);
-  const related = insights ? `HP症状ページでは ${insights} と関連しやすい構成です。` : '';
-  return `今回のチェックでは合計${total}項目が選択されています。特に ${names} の比重が高く、${clinical} ${related}`;
+  const nervous = active.some(v => ['頭・神経系','睡眠','精神・感情'].includes(v.name));
+  const body = active.some(v => ['心臓・血圧・循環','呼吸','消化器','皮膚・発汗','全身・体調'].includes(v.name));
+  let relation = '自律神経の乱れは、全身の不調として現れやすい状態です。';
+  if (nervous && body) relation = '頭・睡眠・感情面に加えて身体症状も出ており、自律神経のバランス低下が全身に影響している可能性があります。';
+  else if (nervous) relation = '睡眠・頭・気分に関わる項目が目立ち、自律神経の緊張が続いている可能性があります。';
+  else if (body) relation = '呼吸・循環・消化など身体面の反応が目立ち、自律神経の調整負担が高まっている可能性があります。';
+  return `今回のチェックでは合計${total}項目が選択されています。特に ${names} の比重が高く、${relation}`;
 }
 
 function buildComparisonText(currentRecord, prevRecord){
@@ -594,9 +401,9 @@ function renderTopCategoryList(breakdown){
     const el = document.createElement('div');
     el.className = 'top-category-item';
     const pct = Math.round(item.ratio * 100);
-    let desc = '自律神経・気血水・筋緊張との関連を確認する領域です。';
-    if (['頭・神経系','睡眠','精神・感情'].includes(item.name)) desc = '交感神経優位、過覚醒、頸部緊張、睡眠覚醒リズムと関わりやすい領域です。';
-    if (['心臓・血圧・循環','呼吸','消化器','全身・体調'].includes(item.name)) desc = '呼吸・循環・消化を介した自律神経反応として確認したい領域です。';
+    let desc = '自律神経との関連を確認したい領域です。';
+    if (['頭・神経系','睡眠','精神・感情'].includes(item.name)) desc = '自律神経の緊張や睡眠の質と関わりやすい領域です。';
+    if (['心臓・血圧・循環','呼吸','消化器','全身・体調'].includes(item.name)) desc = '自律神経の調整低下が身体反応として出やすい領域です。';
     el.innerHTML = `<strong>${item.name}</strong><span>${item.selected} / ${item.total} 項目（比率 ${pct}%）</span><span>${desc}</span>`;
     refs.topCategoryList.appendChild(el);
   });
@@ -705,7 +512,6 @@ function renderResult() {
       refs.analysisSummary.textContent = buildSummaryText(breakdown, currentRec.total || 0);
       refs.comparisonSummary.textContent = buildComparisonText(currentRec, comp.prev);
       renderTopCategoryList(breakdown);
-      renderClinicalBlocks(breakdown, new Set(currentRec.selectedItems || []));
     } else {
       refs.prevDate.textContent = '-';
       refs.prevTotal.textContent = '-';
@@ -717,7 +523,6 @@ function renderResult() {
       refs.analysisSummary.textContent = buildSummaryText(breakdown, currentRec.total || 0);
       refs.comparisonSummary.textContent = buildComparisonText(currentRec, null);
       renderTopCategoryList(breakdown);
-      renderClinicalBlocks(breakdown, new Set(currentRec.selectedItems || []));
     }
   } else {
     refs.prevDate.textContent = '-';
@@ -732,7 +537,6 @@ function renderResult() {
     refs.analysisSummary.textContent = buildSummaryText(breakdown, currentRec.total || 0);
     refs.comparisonSummary.textContent = buildComparisonText(currentRec, null);
     renderTopCategoryList(breakdown);
-      renderClinicalBlocks(breakdown, new Set(currentRec.selectedItems || []));
   }
 }
 
@@ -995,10 +799,6 @@ function renderPrintReport() {
   setPrintText('printDiffTotal', diff === null ? '-' : diffText(diff));
   setPrintText('printDiffLabel', diff === null ? '初回' : diffLabel(diff));
   setPrintText('printComparisonSummary', buildComparisonText(currentRecord, prevRecord));
-  setPrintHtml('printHpSymptomLinks', buildHpSymptomLinks(getMatchedSymptomInsights(selectedSet)));
-  setPrintText('printMedicalInterpretation', buildMedicalInterpretationText(breakdown, selectedSet));
-  setPrintText('printTcmPattern', buildTcmPatternText(selectedSet));
-  setPrintText('printTreatmentView', buildTreatmentViewText(selectedSet));
   drawPrintDonutChart(currentRecord);
 
   const rows = document.getElementById('printCategoryRows');
@@ -1161,3 +961,224 @@ setStatus('保存機能・前回比較機能付きで起動しました。');
 
 // final runtime marker
 try { console.log('gene admin lock final fix loaded'); } catch (e) {}
+
+
+/* =====================================================
+   gene advanced clinical / TCM / lifestyle report
+   HP症状ページ・生活資料連動版
+===================================================== */
+(function(){
+  const GENE_HP_BASE = 'https://gene-seitai.com/';
+  const HP_SYMPTOMS = [
+    {name:'アトピー', url:'atopy.html', keys:['皮膚がかゆくなりやすい','湿疹や肌荒れが出やすい','肌が乾燥しやすい','浸出液が出る','皮膚がポロポロと落ちる']},
+    {name:'耳鳴り', url:'tinnitus.html', keys:['耳鳴りがする','音に敏感']},
+    {name:'めまい', url:'dizziness.html', keys:['めまいがする','立ちくらみがある','ふらつく感じがある','乗り物酔いしやすい','血圧が不安定だと感じる']},
+    {name:'不眠', url:'insomnia.html', keys:['寝つきが悪い','夜中に目が覚める','朝早く目が覚めてしまう','眠りが浅い','夢をよく見る','寝てもスッキリしない']},
+    {name:'頭痛', url:'headache.html', keys:['頭痛がする','頭が締め付けられる感じがする','目が疲れやすい','光がまぶしく感じる','肩こりがある','首こりがある']},
+    {name:'動悸', url:'palpitations.html', keys:['動悸がする','脈が乱れる感じがある','胸が苦しくなることがある','血圧が不安定だと感じる']},
+    {name:'慢性疲労', url:'chronic-fatigue.html', keys:['慢性的に疲れやすい','休んでも疲れが取れない','朝起きるのがつらい','体が重だるい']},
+    {name:'パニック症状', url:'panic.html', keys:['外出が不安になることがある','人前で緊張しやすい','理由のない緊張感がある','息苦しさを感じることがある','動悸がする']},
+    {name:'不安障害', url:'anxiety-disorder.html', keys:['不安を感じやすい','理由のない緊張感がある','気持ちの波が大きい','外出が不安になることがある']},
+    {name:'吐き気', url:'nausea.html', keys:['吐き気を感じることがある','胃の不快感がある','食欲がない','お腹が張りやすい']},
+    {name:'胃の不快感', url:'stomach-discomfort.html', keys:['胃もたれしやすい','胃の不快感がある','食欲がない','吐き気を感じることがある']},
+    {name:'PMS', url:'pms.html', keys:['生理前に体調が大きく崩れる','生理周期が乱れやすい','生理痛が強い','気持ちの波が大きい']},
+    {name:'冷え性', url:'cold.html', keys:['手足や体が冷えやすい','寒暖差に弱い','のぼせやすい','血圧が不安定だと感じる']},
+    {name:'自律神経失調症', url:'autonomic-imbalance.html', keys:['眠りが浅い','動悸がする','息苦しさを感じることがある','めまいがする','体が重だるい','不安を感じやすい']},
+    {name:'足底筋膜炎', url:'plantar-fasciitis.html', keys:['足底筋膜炎','体がこわばりやすい']},
+    {name:'顎関節症', url:'tmj.html', keys:['顎関節症','頭が締め付けられる感じがする','首こりがある']},
+    {name:'腱鞘炎', url:'tenosynovitis.html', keys:['腱鞘炎','手足がしびれることがある','筋肉がピクピク動くことがある']},
+    {name:'起立性調節障害', url:'orthostatic-dysregulation.html', keys:['立ちくらみがある','朝起きるのがつらい','めまいがする','血圧が不安定だと感じる','体が重だるい']},
+    {name:'過敏性腸症候群', url:'ibs.html', keys:['便秘と下痢を繰り返す','下痢をしやすい','便秘になりやすい','お腹が張りやすい']},
+    {name:'慢性便秘', url:'chronic-constipation.html', keys:['便秘になりやすい','お腹が張りやすい','食欲がない']},
+    {name:'息苦しさ', url:'shortness-of-breath.html', keys:['息が吸いにくい','深呼吸がしづらい','息苦しさを感じることがある','胸が苦しくなることがある']},
+    {name:'喉の違和感', url:'throat-discomfort.html', keys:['喉が詰まる感じがする','飲み込みにくさを感じる','口が渇きやすい','理由のない緊張感がある']}
+  ];
+
+  const CATEGORY_MEDICAL = {
+    '全身・体調': {type:'HPA軸負荷・慢性疲労型', tcm:'気虚・陽虚・腎虚傾向', body:'胸郭、横隔膜、骨盤帯、下肢循環', point:'慢性的な交感神経賦活と回復反応の低下を考え、呼吸運動と循環を妨げる筋膜緊張を優先して確認します。'},
+    '心臓・血圧・循環': {type:'循環調節不安定型', tcm:'心気虚・心血不足・気逆傾向', body:'胸郭前面、肋間、鎖骨下、頸部前面、上部胸椎', point:'動悸や血圧変動は循環調節と呼吸パターンの影響を受けやすいため、胸郭の可動性と頸胸移行部の緊張を確認します。'},
+    '消化器': {type:'腸管神経叢・迷走神経負担型', tcm:'脾胃虚弱・肝脾不和・湿滞傾向', body:'横隔膜、肋骨弓、腹部、骨盤、腰背部', point:'胃腸症状は迷走神経・腸内環境・腹圧の影響を受けやすいため、横隔膜と腹部の滑走性を丁寧に確認します。'},
+    '呼吸': {type:'呼吸運動制限・過換気傾向型', tcm:'肺気虚・気滞・上焦の緊張', body:'横隔膜、肋間筋、胸鎖乳突筋、斜角筋、胸椎', point:'呼吸の浅さは胸郭と頸部補助呼吸筋の過緊張が関与しやすいため、呼気が自然に長くなる身体条件を整えます。'},
+    '頭・神経系': {type:'前庭神経・頸性緊張・感覚過敏型', tcm:'肝陽上亢・肝血虚・腎虚傾向', body:'後頭下筋群、頸椎、側頭部、顎、眼周囲', point:'めまい・頭痛・耳鳴りは頸部緊張、眼精疲労、前庭系の過敏性と関わりやすいため、後頭下筋群と頭頸部の負担を確認します。'},
+    '睡眠': {type:'睡眠覚醒リズム低下型', tcm:'心脾両虚・陰虚火旺・肝鬱化火傾向', body:'頭部、頸部、胸郭、腹部、仙骨周囲', point:'入眠困難や中途覚醒は交感神経優位が続く時に出やすいため、頸部・胸郭・腹部の緊張を下げる方向で見立てます。'},
+    '筋肉・関節': {type:'筋膜緊張・防御収縮型', tcm:'気滞血瘀・寒湿・経絡不通傾向', body:'頸肩背部、胸腰筋膜、骨盤帯、下肢', point:'慢性的な筋緊張は痛みの部位だけでなく呼吸・循環・姿勢保持の影響を受けるため、全身の連動性を見ます。'},
+    '精神・感情': {type:'情動系過覚醒・辺縁系緊張型', tcm:'肝鬱気滞・心神不安・肝火上炎傾向', body:'胸郭、みぞおち、頸部、側頭部、腹部', point:'不安や緊張は胸郭の硬さ、呼吸の浅さ、みぞおちの緊張と連動しやすいため、身体側から安心しやすい条件を作ります。'},
+    '目・口・喉': {type:'上咽頭・頸部緊張・感覚過敏型', tcm:'肝鬱気滞・肺陰虚・痰気交阻傾向', body:'舌骨周囲、前頸部、顎、後頭部、胸郭上部', point:'喉の違和感や口渇は頸部前面・呼吸・自律神経緊張の影響を受けやすく、首の前後の緊張差を確認します。'},
+    '排尿・生理': {type:'骨盤内循環・内分泌リズム負担型', tcm:'腎虚・肝鬱・瘀血傾向', body:'下腹部、仙骨、骨盤底、股関節、腰部', point:'排尿や月経関連の不調は骨盤内循環と自律神経の切り替えが関係しやすいため、骨盤周囲と下腹部の緊張を確認します。'},
+    '皮膚・発汗': {type:'皮膚バリア・免疫過敏・発汗調節型', tcm:'肺脾気虚・血虚風燥・湿熱傾向', body:'胸郭、腹部、背部、頸部、皮膚緊張部位', point:'皮膚症状や発汗異常は免疫・腸・自律神経の影響を受けやすいため、体表だけでなく内臓負担と呼吸の状態も確認します。'},
+    '感覚・その他': {type:'感覚過敏・環境ストレス反応型', tcm:'肝鬱・肝陽上亢・気滞傾向', body:'頭頸部、眼周囲、胸郭、背部', point:'音・光・気圧への過敏性は神経系の閾値低下として捉え、刺激量を抑えた調整を優先します。'}
+  };
+
+  const FOOD_RULES = [
+    {name:'砂糖', doc:'砂糖資料', weight:0, keys:['イライラしやすい','気持ちの波が大きい','頭痛がする','肩こりがある','腰に違和感がある','便秘になりやすい','湿疹や肌荒れが出やすい','皮膚がかゆくなりやすい','寝てもスッキリしない'], reason:'血糖値の急上昇と急降下に伴うアドレナリン・ノルアドレナリン分泌、腸内環境の乱れが自律神経負担につながる可能性を説明します。', advice:'甘味を完全禁止にせず、白砂糖の頻度を見直し、きび砂糖・甜菜糖・黒砂糖などへ置き換える提案が向いています。'},
+    {name:'小麦', doc:'小麦資料', weight:0, keys:['お腹が張りやすい','便秘と下痢を繰り返す','下痢をしやすい','便秘になりやすい','慢性的に疲れやすい','頭痛がする','肩こりがある','集中力が続かない','不安を感じやすい','湿疹や肌荒れが出やすい'], reason:'グルテンによる腸粘膜負担、腸管バリア低下、免疫・自律神経への影響を説明します。', advice:'連日のパン・麺・揚げ物を避け、米・玄米・雑穀・米粉食品への置き換えを提案しやすい状態です。'},
+    {name:'乳製品', doc:'乳製品資料', weight:0, keys:['お腹が張りやすい','下痢をしやすい','胃の不快感がある','体が重だるい','慢性的に疲れやすい','頭痛がする','肩こりがある','気分が落ち込みやすい','湿疹や肌荒れが出やすい'], reason:'乳糖（ラクトース）分解負担、カゼインによる腸粘膜負担、軽い炎症反応や自律神経の乱れとの関連を説明します。', advice:'牛乳・ヨーグルト・チーズの頻度と摂取後の体調を確認し、豆乳、アーモンドミルク、小魚、海藻、味噌・ぬか漬けなどを候補にします。'}
+  ];
+
+  function gSelected(){ return new Set(Array.from(state.selected || [])); }
+  function gCounts(){ return getCategoryBreakdown(gSelected()).filter(v=>v.selected>0).sort((a,b)=>b.selected-a.selected || b.ratio-a.ratio); }
+  function gHasAny(keys, selected){ return keys.some(k => selected.has(k)); }
+  function gScore(keys, selected){ return keys.reduce((n,k)=> n + (selected.has(k)?1:0), 0); }
+  function gEsc(v){ return String(v==null?'':v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;'); }
+  function gUrl(path){ return GENE_HP_BASE + path; }
+
+  function geneHpMatches(selected){
+    return HP_SYMPTOMS.map(s => ({...s, score:gScore(s.keys, selected)})).filter(s=>s.score>0).sort((a,b)=>b.score-a.score).slice(0,6);
+  }
+
+  function geneTypeReport(){
+    const b = Object.fromEntries(gCounts().map(v=>[v.name,v.selected]));
+    const selected = gSelected();
+    const types = [];
+    const add=(label,score,desc,tcm)=>{ if(score>0) types.push({label,score,desc,tcm}); };
+    add('交感神経優位型', (b['睡眠']||0)+(b['精神・感情']||0)+(b['頭・神経系']||0)+(b['心臓・血圧・循環']||0), '睡眠・情動・循環の切り替えが不安定になり、過覚醒状態が続いている可能性があります。', '肝鬱気滞、心神不安、肝陽上亢');
+    add('迷走神経・消化器負担型', (b['消化器']||0)*2+(b['全身・体調']||0)+(b['皮膚・発汗']||0), '胃腸症状と疲労・皮膚反応が重なる場合、腸管神経叢と迷走神経の負担を考えます。', '脾胃虚弱、肝脾不和、湿滞');
+    add('呼吸・循環制限型', (b['呼吸']||0)*2+(b['心臓・血圧・循環']||0)+(b['筋肉・関節']||0), '胸郭の可動性低下、補助呼吸筋の緊張、循環調節の乱れを確認します。', '肺気虚、気滞、心気虚');
+    add('感覚過敏・前庭神経型', (b['頭・神経系']||0)+(b['目・口・喉']||0)+(b['感覚・その他']||0), '光・音・気圧・めまい・耳鳴りなどが重なる場合、神経系の刺激閾値低下を見ます。', '肝陽上亢、腎虚、痰気交阻');
+    add('皮膚・免疫バリア型', (b['皮膚・発汗']||0)*2+(b['消化器']||0), '皮膚バリア、腸内環境、免疫反応、自律神経の連動を確認します。', '肺脾気虚、血虚風燥、湿熱');
+    add('骨盤内リズム型', (b['排尿・生理']||0)*2+(b['全身・体調']||0), '骨盤内循環、内分泌リズム、下腹部・仙骨周囲の緊張を確認します。', '腎虚、肝鬱、瘀血');
+    types.sort((a,b)=>b.score-a.score);
+    if(!types.length) return [{label:'未分類',score:0,desc:'選択項目が少ないため、明確なタイプ判定は行いません。',tcm:'-'}];
+    return types.slice(0,3);
+  }
+
+  function lifestyleAdvice(){
+    const selected = gSelected();
+    const advice = [];
+    const add=(title,items)=> advice.push({title,items});
+    if(gHasAny(['寝つきが悪い','夜中に目が覚める','眠りが浅い','寝てもスッキリしない','朝早く目が覚めてしまう'], selected)) add('睡眠リズム', ['起床後に朝日を浴びる','就寝90分前までに入浴を済ませる','寝る直前のスマホ・強い光を控える','夕方以降のカフェインを見直す']);
+    if(gHasAny(['胃もたれしやすい','胃の不快感がある','吐き気を感じることがある','お腹が張りやすい','便秘になりやすい','下痢をしやすい','便秘と下痢を繰り返す'], selected)) add('胃腸・食事', ['早食いを避け、よく噛む','夕食を遅くしすぎない','冷たい飲食物を続けない','食後すぐに横にならない']);
+    if(gHasAny(['息が吸いにくい','深呼吸がしづらい','息苦しさを感じることがある','動悸がする','胸が苦しくなることがある'], selected)) add('呼吸・動悸', ['吸うより吐く時間を少し長くする','胸を張りすぎず肋骨の動きを作る','カフェイン・エナジードリンクの量を確認する','息苦しさが強い日は無理な運動を避ける']);
+    if(gHasAny(['手足や体が冷えやすい','寒暖差に弱い','のぼせやすい'], selected)) add('冷え・循環', ['足首・下腹部を冷やさない','短時間でもふくらはぎを動かす','白湯など温かい飲み物を取り入れる','長時間同じ姿勢を避ける']);
+    if(gHasAny(['皮膚がかゆくなりやすい','湿疹や肌荒れが出やすい','肌が乾燥しやすい','浸出液が出る'], selected)) add('皮膚・腸内環境', ['睡眠不足を避ける','汗をかいた後は刺激を残さない','砂糖・小麦・乳製品の摂取後の変化を記録する','便通と皮膚状態を一緒に確認する']);
+    if(!advice.length) add('基本ケア', ['睡眠・食事・呼吸・歩行量を一つずつ確認する','症状が増えるタイミングをメモする','無理な制限ではなく継続できる調整を優先する']);
+    return advice.slice(0,5);
+  }
+
+  function foodAdvice(){
+    const selected = gSelected();
+    return FOOD_RULES.map(rule => ({...rule, score:gScore(rule.keys, selected)})).filter(v=>v.score>0).sort((a,b)=>b.score-a.score).slice(0,3);
+  }
+
+  function treatmentPlan(){
+    const counts = gCounts();
+    const blocks = counts.slice(0,4).map(c => {
+      const d = CATEGORY_MEDICAL[c.name] || {type:'全身調整型',tcm:'気血水の偏り',body:'全身',point:'選択項目に応じて身体全体の反応を確認します。'};
+      return {cat:c.name, count:c.selected, ...d};
+    });
+    if(!blocks.length) return [{cat:'未選択',count:0,type:'-',tcm:'-',body:'-',point:'症状を選択すると施術方針が表示されます。'}];
+    return blocks;
+  }
+
+  function practitionerChecks(){
+    const selected = gSelected();
+    const list = [];
+    if(gHasAny(['寝つきが悪い','夜中に目が覚める','眠りが浅い'], selected)) list.push('睡眠時間、中途覚醒、起床時疲労、就寝前スマホ・カフェイン');
+    if(gHasAny(['胃の不快感がある','便秘になりやすい','下痢をしやすい','お腹が張りやすい'], selected)) list.push('便通頻度、腹部膨満、食後症状、砂糖・小麦・乳製品摂取頻度');
+    if(gHasAny(['動悸がする','息苦しさを感じることがある','血圧が不安定だと感じる'], selected)) list.push('安静時拍動感、カフェイン量、呼吸の浅さ、胸郭可動性');
+    if(gHasAny(['めまいがする','立ちくらみがある','耳鳴りがする'], selected)) list.push('起立時変化、首肩緊張、眼精疲労、気圧変化の影響');
+    if(gHasAny(['湿疹や肌荒れが出やすい','皮膚がかゆくなりやすい'], selected)) list.push('皮膚悪化の時期、睡眠、便通、発汗、食品摂取後の変化');
+    if(!list.length) list.push('症状の出る時間帯、悪化要因、睡眠、食事、ストレス、姿勢負担');
+    return list;
+  }
+
+  function totalScore(){
+    const total = state.selected.size;
+    const cats = gCounts().length;
+    const intense = gCounts().slice(0,3).reduce((s,v)=>s+v.selected,0);
+    const score = Math.min(100, Math.round(total*1.05 + cats*3 + intense*1.2));
+    let label = '軽度';
+    if(score >= 66) label = '重度';
+    else if(score >= 36) label = '中度';
+    return {score,label};
+  }
+
+  function ensureGeneAdvancedSections(){
+    const result = document.getElementById('resultSection');
+    if(result && !document.getElementById('geneAdvancedReport')){
+      const section = document.createElement('div');
+      section.id = 'geneAdvancedReport';
+      section.className = 'gene-advanced-report';
+      section.innerHTML = `
+        <div class="advanced-card"><div class="section-head mini"><h3>医学的・東洋医学的レポート</h3><p>HP症状ページ / 生活資料連動</p></div><div id="geneTypeCards" class="advanced-grid"></div></div>
+        <div class="advanced-card"><h3>HP症状ページとの関連</h3><div id="geneHpLinks" class="hp-link-grid"></div></div>
+        <div class="advanced-card"><h3>施術方針の見立て</h3><div id="geneTreatmentPlan" class="treatment-list"></div></div>
+        <div class="advanced-card"><h3>生活習慣アドバイス</h3><div id="geneLifestyleAdvice" class="lifestyle-list"></div></div>
+        <div class="advanced-card"><h3>砂糖・小麦・乳製品との関連</h3><div id="geneFoodAdvice" class="food-list"></div></div>
+        <div class="advanced-card"><h3>施術者用確認ポイント</h3><ul id="genePractitionerChecks" class="check-list"></ul></div>
+        <p class="gene-disclaimer">※この結果は医療上の診断ではありません。強い症状、急な悪化、胸痛、強い息苦しさ、神経症状がある場合は医療機関への相談を優先してください。</p>
+      `;
+      const anchor = result.querySelector('.history-card') || result.querySelector('.selected-card') || result.lastElementChild;
+      result.insertBefore(section, anchor);
+    }
+    const printInner = document.querySelector('#printOnlyReport .print-report-inner');
+    if(printInner && !document.getElementById('printGeneAdvanced')){
+      const p = document.createElement('section');
+      p.id = 'printGeneAdvanced';
+      p.className = 'print-section';
+      p.innerHTML = `
+        <h2>医学的・東洋医学的見立て</h2><div id="printGeneTypes"></div>
+        <h2>施術方針</h2><div id="printGeneTreatment"></div>
+        <h2>生活習慣アドバイス</h2><div id="printGeneLifestyle"></div>
+        <h2>砂糖・小麦・乳製品との関連</h2><div id="printGeneFood"></div>
+        <h2>施術者用確認ポイント</h2><div id="printGeneChecks"></div>
+      `;
+      const footer = printInner.querySelector('.print-footer');
+      printInner.insertBefore(p, footer || null);
+    }
+  }
+
+  function renderAdvancedGeneReport(){
+    ensureGeneAdvancedSections();
+    const selected = gSelected();
+    const score = totalScore();
+    const types = geneTypeReport();
+    const hp = geneHpMatches(selected);
+    const plan = treatmentPlan();
+    const lifestyle = lifestyleAdvice();
+    const foods = foodAdvice();
+    const checks = practitionerChecks();
+
+    const typeEl = document.getElementById('geneTypeCards');
+    if(typeEl) typeEl.innerHTML = `
+      <div class="advanced-score"><small>総合スコア</small><strong>${score.score}</strong><span>${score.label}</span></div>
+      ${types.map(t=>`<div class="advanced-type"><h4>${gEsc(t.label)}</h4><p>${gEsc(t.desc)}</p><p><strong>東洋医学的傾向：</strong>${gEsc(t.tcm)}</p></div>`).join('')}`;
+
+    const hpEl = document.getElementById('geneHpLinks');
+    if(hpEl) hpEl.innerHTML = hp.length ? hp.map(h=>`<a class="hp-link" href="${gUrl(h.url)}" target="_blank" rel="noopener"><strong>${gEsc(h.name)}</strong><span>関連 ${h.score}項目 / 詳細ページへ</span></a>`).join('') : '<p>関連するHP症状ページは、選択後に表示されます。</p>';
+
+    const trEl = document.getElementById('geneTreatmentPlan');
+    if(trEl) trEl.innerHTML = plan.map(p=>`<div class="treatment-item"><h4>${gEsc(p.cat)}：${gEsc(p.type)}</h4><p><strong>確認部位：</strong>${gEsc(p.body)}</p><p><strong>東洋医学的見立て：</strong>${gEsc(p.tcm)}</p><p>${gEsc(p.point)}</p></div>`).join('');
+
+    const lifeEl = document.getElementById('geneLifestyleAdvice');
+    if(lifeEl) lifeEl.innerHTML = lifestyle.map(a=>`<div class="lifestyle-item"><h4>${gEsc(a.title)}</h4><ul>${a.items.map(i=>`<li>${gEsc(i)}</li>`).join('')}</ul></div>`).join('');
+
+    const foodEl = document.getElementById('geneFoodAdvice');
+    if(foodEl) foodEl.innerHTML = foods.length ? foods.map(f=>`<div class="food-item"><h4>${gEsc(f.name)}との関連</h4><p>${gEsc(f.reason)}</p><p><strong>提案：</strong>${gEsc(f.advice)}</p><span>${gEsc(f.doc)}と関連付け</span></div>`).join('') : '<p>砂糖・小麦・乳製品との強い関連は現時点では目立ちません。症状の出方に応じて確認します。</p>';
+
+    const chkEl = document.getElementById('genePractitionerChecks');
+    if(chkEl) chkEl.innerHTML = checks.map(c=>`<li>${gEsc(c)}</li>`).join('');
+  }
+
+  function renderAdvancedPrintReport(){
+    ensureGeneAdvancedSections();
+    const selected = gSelected();
+    const score = totalScore();
+    const types = geneTypeReport();
+    const plan = treatmentPlan();
+    const lifestyle = lifestyleAdvice();
+    const foods = foodAdvice();
+    const checks = practitionerChecks();
+    const set=(id,html)=>{ const el=document.getElementById(id); if(el) el.innerHTML=html; };
+    set('printGeneTypes', `<p><strong>総合スコア：</strong>${score.score}（${score.label}）</p>` + types.map(t=>`<p><strong>${gEsc(t.label)}</strong><br>${gEsc(t.desc)}<br>東洋医学的傾向：${gEsc(t.tcm)}</p>`).join(''));
+    set('printGeneTreatment', plan.map(p=>`<p><strong>${gEsc(p.cat)}：${gEsc(p.type)}</strong><br>確認部位：${gEsc(p.body)}<br>東洋医学的見立て：${gEsc(p.tcm)}<br>${gEsc(p.point)}</p>`).join(''));
+    set('printGeneLifestyle', lifestyle.map(a=>`<p><strong>${gEsc(a.title)}</strong><br>${a.items.map(i=>'・'+gEsc(i)).join('<br>')}</p>`).join(''));
+    set('printGeneFood', foods.length ? foods.map(f=>`<p><strong>${gEsc(f.name)}</strong><br>${gEsc(f.reason)}<br>提案：${gEsc(f.advice)}</p>`).join('') : '<p>強い関連は目立ちません。</p>');
+    set('printGeneChecks', '<ul>' + checks.map(c=>`<li>${gEsc(c)}</li>`).join('') + '</ul>');
+  }
+
+  const baseRenderResult = renderResult;
+  renderResult = function(){ baseRenderResult(); renderAdvancedGeneReport(); };
+  const baseRenderPrintReport = renderPrintReport;
+  renderPrintReport = function(){ baseRenderPrintReport(); renderAdvancedPrintReport(); };
+})();

@@ -1246,13 +1246,61 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
   }
 
   function getPatientMeta(){
-    const nameInput = document.querySelector('input[name*="name"], input[id*="name"], input[placeholder*="名前"], input[placeholder*="お名前"]');
-    const ageInput = document.querySelector('input[name*="age"], input[id*="age"], input[placeholder*="年齢"]');
-    const name = nameInput ? cleanText(nameInput.value) : "";
-    const age = ageInput ? cleanText(ageInput.value) : "";
+    function normalize(s){
+      return (s || "").replace(/\s+/g, " ").trim();
+    }
+
+    function findInputByKeywords(keywords){
+      const fields = Array.from(document.querySelectorAll("input, textarea, select"));
+      for(const el of fields){
+        const id = el.id || "";
+        const name = el.name || "";
+        const placeholder = el.placeholder || "";
+        const aria = el.getAttribute("aria-label") || "";
+        let labelText = "";
+
+        if(id){
+          try{
+            const label = document.querySelector('label[for="'+CSS.escape(id)+'"]');
+            if(label) labelText += " " + label.innerText;
+          }catch(e){}
+        }
+
+        const row = el.closest("tr, .field, .form-group, .input-row, .question, .card, section, div");
+        if(row) labelText += " " + row.innerText;
+
+        const haystack = normalize([id,name,placeholder,aria,labelText].join(" "));
+        if(keywords.some(k => haystack.includes(k))){
+          const value = normalize(el.value);
+          if(value) return value;
+        }
+      }
+      return "";
+    }
+
+    function findTextNearLabel(labelWords){
+      const all = Array.from(document.querySelectorAll("input, textarea, select"));
+      for(const el of all){
+        const value = normalize(el.value);
+        if(!value) continue;
+        const parent = el.closest("tr, .field, .form-group, .input-row, .question, .card, section, div");
+        const text = normalize(parent ? parent.innerText : "");
+        if(labelWords.some(w => text.includes(w))) return value;
+      }
+      return "";
+    }
+
+    const name =
+      findInputByKeywords(["お名前","名前","氏名","name","patient"]) ||
+      findTextNearLabel(["お名前","名前","氏名"]);
+
+    const age =
+      findInputByKeywords(["年齢","年令","age","歳"]) ||
+      findTextNearLabel(["年齢","年令","歳"]);
+
     const now = new Date();
     const date = now.getFullYear()+"/"+String(now.getMonth()+1).padStart(2,"0")+"/"+String(now.getDate()).padStart(2,"0")+" "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
-    return {name: name || "ゲスト", age: age || "-", date};
+    return {name: name || "未入力", age: age || "-", date};
   }
 
   function categoryCounts(symptoms){

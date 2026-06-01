@@ -1114,174 +1114,212 @@ button::after {
 
 
 /* =========================================================
-   A4 LANDSCAPE ONE PAGE PRINT OVERRIDE
-   変更ファイルのみ配布用
+   A4 LANDSCAPE SINGLE PAGE FINAL OVERRIDE
+   A4横向き1枚・名前印刷修正版
 ========================================================= */
 
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 6mm;
+    size: 297mm 210mm;
+    margin: 4mm;
   }
 
   html,
   body {
-    width: 100% !important;
-    height: auto !important;
-    overflow: visible !important;
+    width: 297mm !important;
+    min-width: 297mm !important;
+    max-width: 297mm !important;
+    height: 210mm !important;
+    min-height: 210mm !important;
+    max-height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+  }
+
+  body > *:not(.gene-a4-print-report) {
+    display: none !important;
   }
 
   .gene-a4-print-report {
-    max-width: 285mm !important;
-    width: 285mm !important;
-    min-height: auto !important;
+    display: block !important;
+    width: 284mm !important;
+    max-width: 284mm !important;
+    height: 198mm !important;
+    max-height: 198mm !important;
+    overflow: hidden !important;
     margin: 0 auto !important;
     padding: 0 !important;
-    font-size: 7.3pt !important;
-    line-height: 1.25 !important;
-    transform: scale(0.985);
-    transform-origin: top center;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 6.15pt !important;
+    line-height: 1.12 !important;
+    transform: none !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .gene-a4-print-report * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
   }
 
   .gene-print-header {
+    display: grid !important;
     grid-template-columns: 1fr auto !important;
-    gap: 5mm !important;
-    padding-bottom: 1.5mm !important;
-    margin-bottom: 2mm !important;
+    gap: 4mm !important;
+    padding: 0 0 1mm !important;
+    margin: 0 0 1.3mm !important;
+    border-bottom: 1px solid #222 !important;
   }
 
   .gene-print-title {
-    font-size: 15pt !important;
-    line-height: 1.05 !important;
+    font-size: 12.5pt !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    letter-spacing: .04em !important;
   }
 
   .gene-print-subtitle,
   .gene-print-meta {
-    font-size: 7pt !important;
-    line-height: 1.25 !important;
+    font-size: 5.8pt !important;
+    line-height: 1.18 !important;
+    margin: 0 !important;
   }
 
   .gene-print-grid-top {
-    grid-template-columns: 0.92fr 0.72fr !important;
-    gap: 2mm !important;
-    margin-bottom: 2mm !important;
+    display: grid !important;
+    grid-template-columns: 0.86fr 0.74fr !important;
+    gap: 1.5mm !important;
+    margin: 0 0 1.5mm !important;
   }
 
   .gene-print-grid-2 {
+    display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 2mm !important;
-    margin-bottom: 2mm !important;
-  }
-
-  .gene-print-grid-3 {
-    grid-template-columns: 1fr 1fr 1fr !important;
-    gap: 2mm !important;
-    margin-bottom: 2mm !important;
+    gap: 1.5mm !important;
+    margin: 0 0 1.5mm !important;
   }
 
   .gene-print-card {
-    border-radius: 2mm !important;
-    padding: 2mm !important;
+    border: 1px solid #cfcfcf !important;
+    border-radius: 1.8mm !important;
+    padding: 1.45mm !important;
+    margin: 0 !important;
+    background: #ffffff !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
   .gene-print-card h2 {
-    font-size: 9pt !important;
-    margin: 0 0 1.2mm !important;
-    padding-bottom: 1mm !important;
+    font-size: 7.3pt !important;
+    line-height: 1.08 !important;
+    margin: 0 0 .75mm !important;
+    padding: 0 0 .6mm !important;
+    border-bottom: 1px solid #ddd !important;
   }
 
   .gene-print-card h3 {
-    font-size: 7.8pt !important;
-    margin: 1.2mm 0 .6mm !important;
+    font-size: 6.2pt !important;
+    margin: .65mm 0 .35mm !important;
   }
 
   .gene-print-score {
-    gap: 1mm !important;
-    margin: .5mm 0 1mm !important;
+    gap: .7mm !important;
+    margin: .2mm 0 .5mm !important;
   }
 
   .gene-print-score strong {
-    font-size: 20pt !important;
+    font-size: 15.5pt !important;
+    line-height: 1 !important;
   }
 
   .gene-print-score span,
   .gene-print-badge {
-    font-size: 7pt !important;
+    font-size: 5.8pt !important;
+  }
+
+  .gene-print-badge {
+    padding: .35mm 1.8mm !important;
   }
 
   .gene-print-chart-row {
-    grid-template-columns: 32mm 1fr !important;
-    gap: 2mm !important;
+    display: grid !important;
+    grid-template-columns: 24mm 1fr !important;
+    gap: 1.2mm !important;
+    align-items: center !important;
   }
 
   .gene-print-chart-wrap {
-    width: 30mm !important;
-    height: 30mm !important;
+    width: 24mm !important;
+    height: 24mm !important;
   }
 
   .gene-print-chart-wrap canvas {
-    width: 30mm !important;
-    height: 30mm !important;
-    max-width: 30mm !important;
-    max-height: 30mm !important;
+    width: 24mm !important;
+    height: 24mm !important;
+    max-width: 24mm !important;
+    max-height: 24mm !important;
   }
 
   .gene-print-bars {
-    gap: .6mm !important;
+    gap: .35mm !important;
   }
 
   .gene-print-bar-row {
-    grid-template-columns: 20mm 1fr 9mm !important;
-    gap: 1.2mm !important;
-    font-size: 6.4pt !important;
+    grid-template-columns: 18mm 1fr 7mm !important;
+    gap: .8mm !important;
+    font-size: 5.3pt !important;
   }
 
   .gene-print-bar-track {
-    height: 2.1mm !important;
+    height: 1.65mm !important;
   }
 
   .gene-print-rank {
-    grid-template-columns: 7mm 1fr 16mm !important;
-    gap: 1mm !important;
-    padding: .45mm 0 !important;
-    font-size: 6.8pt !important;
-  }
-
-  .gene-print-list li {
-    margin-bottom: .5mm !important;
+    grid-template-columns: 5mm 1fr 13mm !important;
+    gap: .8mm !important;
+    padding: .25mm 0 !important;
+    font-size: 5.6pt !important;
   }
 
   .gene-print-report-line {
-    grid-template-columns: 23mm 1fr !important;
-    gap: 2mm !important;
-    padding: .75mm 0 !important;
+    grid-template-columns: 18mm 1fr !important;
+    gap: 1.2mm !important;
+    padding: .42mm 0 !important;
   }
 
   .gene-print-food {
-    grid-template-columns: 14mm 1fr !important;
-    gap: 2mm !important;
-    padding: .85mm 0 !important;
+    grid-template-columns: 12mm 1fr !important;
+    gap: 1.2mm !important;
+    padding: .45mm 0 !important;
   }
 
   .gene-print-small {
-    font-size: 6.5pt !important;
+    font-size: 5.25pt !important;
+    line-height: 1.12 !important;
   }
 
   .gene-print-note {
-    margin-top: 1.2mm !important;
-    padding-top: .8mm !important;
-    font-size: 6.1pt !important;
+    margin-top: .8mm !important;
+    padding-top: .5mm !important;
+    font-size: 5.05pt !important;
+    line-height: 1.12 !important;
   }
 
   .gene-print-footer {
-    margin-top: 1.2mm !important;
-    font-size: 6.5pt !important;
+    margin-top: .7mm !important;
+    font-size: 5.4pt !important;
   }
 
   p {
-    margin-top: .5mm !important;
-    margin-bottom: .8mm !important;
+    margin-top: .25mm !important;
+    margin-bottom: .45mm !important;
+  }
+
+  br {
+    display: none !important;
   }
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-a4-white-report-v20260602';
+const CACHE_NAME = 'gene-check-a4-landscape-v20260602';
 const ASSETS = [
   './',
   './index.html',

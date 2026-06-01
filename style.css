@@ -544,7 +544,7 @@ button::after {
 .print-only{display:none;}
 
 @media print{
-  @page{size:A4 portrait;margin:12mm;}
+  @page{size: A4 landscape;margin:12mm;}
 
   html,body{
     width:auto !important;
@@ -848,7 +848,7 @@ button::after {
 
 @media print {
   @page {
-    size: A4 portrait;
+    size: A4 landscape;
     margin: 8mm;
   }
 
@@ -1108,5 +1108,180 @@ button::after {
   .gene-print-page-break {
     break-before: page;
     page-break-before: always;
+  }
+}
+
+
+
+/* =========================================================
+   A4 LANDSCAPE ONE PAGE PRINT OVERRIDE
+   変更ファイルのみ配布用
+========================================================= */
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 6mm;
+  }
+
+  html,
+  body {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .gene-a4-print-report {
+    max-width: 285mm !important;
+    width: 285mm !important;
+    min-height: auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    font-size: 7.3pt !important;
+    line-height: 1.25 !important;
+    transform: scale(0.985);
+    transform-origin: top center;
+  }
+
+  .gene-print-header {
+    grid-template-columns: 1fr auto !important;
+    gap: 5mm !important;
+    padding-bottom: 1.5mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .gene-print-title {
+    font-size: 15pt !important;
+    line-height: 1.05 !important;
+  }
+
+  .gene-print-subtitle,
+  .gene-print-meta {
+    font-size: 7pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .gene-print-grid-top {
+    grid-template-columns: 0.92fr 0.72fr !important;
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .gene-print-grid-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .gene-print-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 2mm !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .gene-print-card {
+    border-radius: 2mm !important;
+    padding: 2mm !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .gene-print-card h2 {
+    font-size: 9pt !important;
+    margin: 0 0 1.2mm !important;
+    padding-bottom: 1mm !important;
+  }
+
+  .gene-print-card h3 {
+    font-size: 7.8pt !important;
+    margin: 1.2mm 0 .6mm !important;
+  }
+
+  .gene-print-score {
+    gap: 1mm !important;
+    margin: .5mm 0 1mm !important;
+  }
+
+  .gene-print-score strong {
+    font-size: 20pt !important;
+  }
+
+  .gene-print-score span,
+  .gene-print-badge {
+    font-size: 7pt !important;
+  }
+
+  .gene-print-chart-row {
+    grid-template-columns: 32mm 1fr !important;
+    gap: 2mm !important;
+  }
+
+  .gene-print-chart-wrap {
+    width: 30mm !important;
+    height: 30mm !important;
+  }
+
+  .gene-print-chart-wrap canvas {
+    width: 30mm !important;
+    height: 30mm !important;
+    max-width: 30mm !important;
+    max-height: 30mm !important;
+  }
+
+  .gene-print-bars {
+    gap: .6mm !important;
+  }
+
+  .gene-print-bar-row {
+    grid-template-columns: 20mm 1fr 9mm !important;
+    gap: 1.2mm !important;
+    font-size: 6.4pt !important;
+  }
+
+  .gene-print-bar-track {
+    height: 2.1mm !important;
+  }
+
+  .gene-print-rank {
+    grid-template-columns: 7mm 1fr 16mm !important;
+    gap: 1mm !important;
+    padding: .45mm 0 !important;
+    font-size: 6.8pt !important;
+  }
+
+  .gene-print-list li {
+    margin-bottom: .5mm !important;
+  }
+
+  .gene-print-report-line {
+    grid-template-columns: 23mm 1fr !important;
+    gap: 2mm !important;
+    padding: .75mm 0 !important;
+  }
+
+  .gene-print-food {
+    grid-template-columns: 14mm 1fr !important;
+    gap: 2mm !important;
+    padding: .85mm 0 !important;
+  }
+
+  .gene-print-small {
+    font-size: 6.5pt !important;
+  }
+
+  .gene-print-note {
+    margin-top: 1.2mm !important;
+    padding-top: .8mm !important;
+    font-size: 6.1pt !important;
+  }
+
+  .gene-print-footer {
+    margin-top: 1.2mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  p {
+    margin-top: .5mm !important;
+    margin-bottom: .8mm !important;
   }
 }

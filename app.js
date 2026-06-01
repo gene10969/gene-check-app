@@ -1362,6 +1362,74 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     return weightedScore(symptoms || []);
   }
 
+  
+  function getScreenTotalCount(){
+    const body = document.body ? document.body.innerText : "";
+
+    const totalPatterns = [
+      /合計チェック数\s*([0-9]{1,3})/,
+      /合計\s*チェック数\s*([0-9]{1,3})/,
+      /チェック数\s*([0-9]{1,3})/,
+      /症状数\s*([0-9]{1,3})/
+    ];
+
+    for(const p of totalPatterns){
+      const m = body.match(p);
+      if(m){
+        const n = parseInt(m[1], 10);
+        if(Number.isFinite(n) && n >= 0 && n <= 100) return n;
+      }
+    }
+    return null;
+  }
+
+  function getScreenCategoryCounts(){
+    const body = document.body ? document.body.innerText : "";
+    const counts = {};
+    const allow = [
+      "筋肉・関節",
+      "皮膚・発汗",
+      "感覚・その他",
+      "頭・神経系",
+      "呼吸・循環",
+      "睡眠・精神",
+      "消化器",
+      "循環器系",
+      "運動器",
+      "生活習慣",
+      "全身・体調",
+      "精神・感情",
+      "皮膚・免疫"
+    ];
+
+    const lines = body.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    for(const line of lines){
+      for(const cat of allow){
+        if(line.includes(cat)){
+          const m = line.match(/([0-9]{1,2})\s*\/\s*[0-9]{1,2}\s*項目/);
+          if(m){
+            const n = parseInt(m[1],10);
+            if(Number.isFinite(n) && n > 0){
+              counts[cat] = Math.max(counts[cat] || 0, n);
+            }
+          }
+        }
+      }
+    }
+
+    return Object.keys(counts).length ? counts : null;
+  }
+
+  function getUnifiedPrintMetrics(symptoms){
+    const screenCounts = getScreenCategoryCounts();
+    const counts = screenCounts || categoryCounts(symptoms);
+    const screenTotal = getScreenTotalCount();
+    const sum = Object.values(counts).reduce((a,b)=>a+b,0);
+    const total = screenTotal !== null ? screenTotal : (sum || symptoms.length);
+    const lv = scoreLevel(total, symptoms);
+    return {counts, total, lv};
+  }
+
   function topSymptoms(symptoms){
     return symptoms.slice(0,5);
   }
@@ -1468,9 +1536,10 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     if(!target) return;
 
     const symptoms = getCheckedSymptoms();
-    const counts = categoryCounts(symptoms);
-    const total = symptoms.length;
-    const lv = scoreLevel(total, symptoms);
+    const metrics = getUnifiedPrintMetrics(symptoms);
+    const counts = metrics.counts;
+    const total = metrics.total;
+    const lv = metrics.lv;
     const meta = getPatientMeta();
     const top = topSymptoms(symptoms);
     const cats = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
@@ -1550,7 +1619,7 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
       <div class="gene-print-footer">大阪 自律神経専門整体院 gene</div>
     `;
 
-    setTimeout(()=>drawPrintChart(document.getElementById("genePrintDonutChart"), counts, Math.max(total,1)), 30);
+    drawPrintChart(document.getElementById("genePrintDonutChart"), counts, Math.max(total,1));
   }
 
   window.geneBuildA4PrintReport = buildReport;

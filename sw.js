@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-score-unified-v20260602';
+const CACHE_NAME = 'gene-check-print-sync-chart-v20260602';
 const ASSETS = [
   './',
   './index.html',

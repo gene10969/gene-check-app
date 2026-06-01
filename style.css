@@ -1409,3 +1409,58 @@ button::after {
     page-break-inside: avoid !important;
   }
 }
+
+
+
+/* =========================================================
+   PRINT VALUE / CHART SYNC FIX
+   画面集計値と印刷値を統一・①丸形チャート表示安定化
+========================================================= */
+
+@media print {
+  .gene-print-chart-row {
+    display: grid !important;
+    grid-template-columns: 24mm 24mm 1fr !important;
+    gap: 1.2mm !important;
+    align-items: center !important;
+  }
+
+  .gene-print-chart-wrap {
+    display: block !important;
+    width: 23mm !important;
+    height: 23mm !important;
+    min-width: 23mm !important;
+    min-height: 23mm !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+  }
+
+  .gene-print-chart-wrap canvas {
+    display: block !important;
+    width: 23mm !important;
+    height: 23mm !important;
+    min-width: 23mm !important;
+    min-height: 23mm !important;
+    max-width: 23mm !important;
+    max-height: 23mm !important;
+    background: #ffffff !important;
+  }
+
+  .gene-print-score-summary {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .6mm !important;
+  }
+
+  .gene-print-mini-metric {
+    padding: .45mm .7mm !important;
+  }
+
+  .gene-print-mini-metric strong {
+    font-size: 10pt !important;
+  }
+
+  .gene-print-mini-metric strong.is-level {
+    font-size: 7.6pt !important;
+  }
+}

@@ -1266,8 +1266,8 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
           }catch(e){}
         }
 
-        const row = el.closest("tr, .field, .form-group, .input-row, .question, .card, section, div");
-        if(row) labelText += " " + row.innerText;
+        const parent = el.closest("label, tr, .field, .form-group, .input-row, .question, .card, section, div");
+        if(parent) labelText += " " + parent.innerText;
 
         const haystack = normalize([id,name,placeholder,aria,labelText].join(" "));
         if(keywords.some(k => haystack.includes(k))){
@@ -1278,25 +1278,11 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
       return "";
     }
 
-    function findTextNearLabel(labelWords){
-      const all = Array.from(document.querySelectorAll("input, textarea, select"));
-      for(const el of all){
-        const value = normalize(el.value);
-        if(!value) continue;
-        const parent = el.closest("tr, .field, .form-group, .input-row, .question, .card, section, div");
-        const text = normalize(parent ? parent.innerText : "");
-        if(labelWords.some(w => text.includes(w))) return value;
-      }
-      return "";
-    }
-
     const name =
       findInputByKeywords(["お名前","名前","氏名","name","patient"]) ||
-      findTextNearLabel(["お名前","名前","氏名"]);
+      findInputByKeywords(["フリガナ","ふりがな","kana"]);
 
-    const age =
-      findInputByKeywords(["年齢","年令","age","歳"]) ||
-      findTextNearLabel(["年齢","年令","歳"]);
+    const age = findInputByKeywords(["年齢","年令","age","歳"]);
 
     const now = new Date();
     const date = now.getFullYear()+"/"+String(now.getMonth()+1).padStart(2,"0")+"/"+String(now.getDate()).padStart(2,"0")+" "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
@@ -1374,7 +1360,7 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     if(!canvas || !canvas.getContext) return;
     const ctx = canvas.getContext("2d");
     const dpr = 2;
-    const size = 320;
+    const size = 260;
     canvas.width = size*dpr;
     canvas.height = size*dpr;
     ctx.scale(dpr,dpr);
@@ -1394,22 +1380,22 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     entries.forEach(([cat,n],i)=>{
       const angle = (n/total)*Math.PI*2;
       ctx.beginPath();
-      ctx.arc(size/2,size/2,95,start,start+angle);
+      ctx.arc(size/2,size/2,78,start,start+angle);
       ctx.strokeStyle = shades[i % shades.length];
-      ctx.lineWidth = 32;
+      ctx.lineWidth = 24;
       ctx.stroke();
       start += angle;
     });
     ctx.beginPath();
-    ctx.arc(size/2,size/2,56,0,Math.PI*2);
+    ctx.arc(size/2,size/2,45,0,Math.PI*2);
     ctx.fillStyle="#fff";
     ctx.fill();
     ctx.fillStyle="#111";
     ctx.textAlign="center";
-    ctx.font="bold 30px sans-serif";
+    ctx.font="bold 24px sans-serif";
     ctx.fillText(String(total), size/2, size/2+3);
-    ctx.font="12px sans-serif";
-    ctx.fillText("項目", size/2, size/2+24);
+    ctx.font="10px sans-serif";
+    ctx.fillText("項目", size/2, size/2+20);
   }
 
   function buildBars(counts,total){
@@ -1444,9 +1430,7 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
         </div>
         <div class="gene-print-meta">
           診断日：${meta.date}<br>
-          お名前：${meta.name} 様<br>
-          年齢：${meta.age}
-        </div>
+          お名前：${meta.name} 様<br></div>
       </div>
 
       <div class="gene-print-grid-top">

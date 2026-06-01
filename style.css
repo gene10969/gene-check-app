@@ -834,3 +834,279 @@ button::after {
 ===================================================== */
 .gene-advanced-report{display:grid;gap:18px;margin-top:22px}.advanced-card{border:1px solid rgba(217,193,126,.30);border-radius:22px;background:rgba(255,255,255,.045);padding:20px;box-shadow:0 18px 40px rgba(0,0,0,.25)}.advanced-card h3{margin:0 0 14px;color:#f5f0df}.advanced-grid{display:grid;grid-template-columns:180px repeat(3,minmax(0,1fr));gap:14px}.advanced-score,.advanced-type,.treatment-item,.lifestyle-item,.food-item{border:1px solid rgba(217,193,126,.22);border-radius:18px;background:rgba(0,0,0,.20);padding:14px;line-height:1.75}.advanced-score{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.advanced-score small{color:rgba(245,240,223,.72)}.advanced-score strong{font-size:48px;color:#d9c17e;line-height:1}.advanced-score span{color:#f5f0df}.advanced-type h4,.treatment-item h4,.lifestyle-item h4,.food-item h4{margin:0 0 8px;color:#d9c17e}.advanced-type p,.treatment-item p,.food-item p{margin:6px 0;color:rgba(245,240,223,.86)}.hp-link-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.hp-link{display:flex;flex-direction:column;gap:4px;border:1px solid rgba(217,193,126,.28);border-radius:16px;background:rgba(217,193,126,.08);padding:14px;text-decoration:none;color:#f5f0df}.hp-link strong{color:#d9c17e}.hp-link span{font-size:13px;color:rgba(245,240,223,.70)}.treatment-list,.lifestyle-list,.food-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lifestyle-item ul,.check-list{margin:8px 0 0;padding-left:1.2em;color:rgba(245,240,223,.86);line-height:1.8}.food-item span{display:inline-block;margin-top:8px;font-size:12px;color:#d9c17e;border:1px solid rgba(217,193,126,.35);border-radius:999px;padding:4px 10px}.gene-disclaimer{font-size:12px;line-height:1.8;color:rgba(245,240,223,.62);margin:4px 4px 0}@media(max-width:900px){.advanced-grid{grid-template-columns:1fr}.hp-link-grid,.treatment-list,.lifestyle-list,.food-list{grid-template-columns:1fr}.advanced-card{padding:16px}}
 @media print{.gene-advanced-report{display:block!important}.advanced-card,.advanced-score,.advanced-type,.treatment-item,.lifestyle-item,.food-item{background:#fff!important;color:#000!important;border:1px solid #bbb!important;box-shadow:none!important}.advanced-card h3,.advanced-type h4,.treatment-item h4,.lifestyle-item h4,.food-item h4,.advanced-score strong,.hp-link strong{color:#000!important}.advanced-type p,.treatment-item p,.food-item p,.lifestyle-item li,.check-list li{color:#000!important}.hp-link-grid,.advanced-grid,.treatment-list,.lifestyle-list,.food-list{display:block!important}.hp-link{background:#fff!important;color:#000!important;border:1px solid #bbb!important;margin:0 0 6px;text-decoration:none}.gene-disclaimer{color:#000!important}.advanced-card{break-inside:avoid;page-break-inside:avoid;margin-bottom:8px;padding:10px}.print-section p{line-height:1.55}}
+
+
+
+/* =========================================================
+   GENE A4 WHITE PRINT REPORT
+   画面表示は黒×ゴールド、印刷時だけ白背景A4レポート
+========================================================= */
+
+.gene-a4-print-report {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  body > *:not(.gene-a4-print-report) {
+    display: none !important;
+  }
+
+  .gene-a4-print-report {
+    display: block !important;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 190mm;
+    margin: 0 auto;
+    padding: 0;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-family: "Yu Gothic", "YuGothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-size: 9.3pt;
+    line-height: 1.45;
+  }
+
+  .gene-a4-print-report * {
+    box-sizing: border-box;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .gene-print-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8mm;
+    align-items: end;
+    padding: 0 0 3mm;
+    border-bottom: 1.5px solid #222;
+    margin-bottom: 4mm;
+  }
+
+  .gene-print-title {
+    font-size: 18pt;
+    letter-spacing: .08em;
+    font-weight: 700;
+    margin: 0;
+    color: #111 !important;
+  }
+
+  .gene-print-subtitle {
+    font-size: 8.5pt;
+    color: #555 !important;
+    margin-top: 1.5mm;
+  }
+
+  .gene-print-meta {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #333 !important;
+    line-height: 1.6;
+  }
+
+  .gene-print-grid-top {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 3mm;
+    margin-bottom: 3mm;
+  }
+
+  .gene-print-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin-bottom: 3mm;
+  }
+
+  .gene-print-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+    margin-bottom: 3mm;
+  }
+
+  .gene-print-card {
+    border: 1px solid #cfcfcf;
+    background: #ffffff !important;
+    border-radius: 3mm;
+    padding: 3mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .gene-print-card.is-soft {
+    background: #fafafa !important;
+  }
+
+  .gene-print-card h2 {
+    font-size: 11.5pt;
+    margin: 0 0 2mm;
+    color: #111 !important;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1.5mm;
+  }
+
+  .gene-print-card h3 {
+    font-size: 9.5pt;
+    margin: 2.5mm 0 1mm;
+    color: #111 !important;
+  }
+
+  .gene-print-score {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    margin: 1mm 0 2mm;
+  }
+
+  .gene-print-score strong {
+    font-size: 27pt;
+    line-height: 1;
+    color: #111 !important;
+  }
+
+  .gene-print-score span {
+    font-size: 10pt;
+    color: #333 !important;
+  }
+
+  .gene-print-badge {
+    display: inline-block;
+    border: 1px solid #888;
+    border-radius: 999px;
+    padding: 1mm 3mm;
+    font-size: 8.5pt;
+    background: #f5f5f5 !important;
+    color: #111 !important;
+  }
+
+  .gene-print-chart-row {
+    display: grid;
+    grid-template-columns: 44mm 1fr;
+    gap: 3mm;
+    align-items: center;
+  }
+
+  .gene-print-chart-wrap {
+    width: 42mm;
+    height: 42mm;
+    margin: 0 auto;
+  }
+
+  .gene-print-chart-wrap canvas {
+    width: 42mm !important;
+    height: 42mm !important;
+    max-width: 42mm !important;
+    max-height: 42mm !important;
+  }
+
+  .gene-print-bars {
+    display: grid;
+    gap: 1.2mm;
+  }
+
+  .gene-print-bar-row {
+    display: grid;
+    grid-template-columns: 24mm 1fr 12mm;
+    gap: 2mm;
+    align-items: center;
+    font-size: 8pt;
+  }
+
+  .gene-print-bar-track {
+    height: 3.2mm;
+    border: 1px solid #d0d0d0;
+    background: #fff !important;
+  }
+
+  .gene-print-bar-fill {
+    height: 100%;
+    background: #bdbdbd !important;
+  }
+
+  .gene-print-list {
+    margin: 0;
+    padding-left: 4.5mm;
+  }
+
+  .gene-print-list li {
+    margin: 0 0 1.2mm;
+  }
+
+  .gene-print-rank {
+    display: grid;
+    grid-template-columns: 9mm 1fr 12mm;
+    gap: 2mm;
+    border-bottom: 1px dotted #ccc;
+    padding: .8mm 0;
+  }
+
+  .gene-print-report-line {
+    display: grid;
+    grid-template-columns: 28mm 1fr;
+    gap: 3mm;
+    padding: 1.4mm 0;
+    border-bottom: 1px dotted #d4d4d4;
+  }
+
+  .gene-print-report-label {
+    font-weight: 700;
+    color: #111 !important;
+  }
+
+  .gene-print-food {
+    display: grid;
+    grid-template-columns: 18mm 1fr;
+    gap: 2.5mm;
+    padding: 1.5mm 0;
+    border-bottom: 1px dotted #d4d4d4;
+  }
+
+  .gene-print-food:last-child {
+    border-bottom: 0;
+  }
+
+  .gene-print-food-title {
+    font-weight: 700;
+    color: #111 !important;
+  }
+
+  .gene-print-small {
+    font-size: 7.7pt;
+    color: #444 !important;
+  }
+
+  .gene-print-note {
+    margin-top: 2mm;
+    font-size: 7.4pt;
+    color: #555 !important;
+    border-top: 1px solid #ddd;
+    padding-top: 1.5mm;
+  }
+
+  .gene-print-footer {
+    margin-top: 3mm;
+    text-align: right;
+    font-size: 8pt;
+    color: #333 !important;
+  }
+
+  .gene-print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+}

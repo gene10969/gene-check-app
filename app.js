@@ -1182,3 +1182,293 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
   const baseRenderPrintReport = renderPrintReport;
   renderPrintReport = function(){ baseRenderPrintReport(); renderAdvancedPrintReport(); };
 })();
+
+
+
+/* =========================================================
+   GENE A4 WHITE PRINT REPORT BUILDER
+========================================================= */
+(function(){
+  const symptomMeta = {
+    "めまい": {cat:"頭・神経系", hp:"めまい", medical:"前庭系・頸部固有受容器・自律神経性血流調節の影響を考慮します。", tcm:"肝陽上亢・痰濁・気血不足の観点で評価します。"},
+    "耳鳴り": {cat:"頭・神経系", hp:"耳鳴り", medical:"内耳循環、頸部筋緊張、睡眠・ストレス負荷との関連を確認します。", tcm:"腎虚・肝火・気滞の観点で評価します。"},
+    "パニック障害": {cat:"精神・感情", hp:"パニック症状", medical:"過換気傾向、交感神経興奮、扁桃体過活動に伴う身体反応を考慮します。", tcm:"気逆・気滞・心脾両虚の観点で評価します。"},
+    "不眠症": {cat:"睡眠・精神", hp:"不眠", medical:"睡眠覚醒リズム、HPA軸、コルチゾール分泌、交感神経優位を確認します。", tcm:"心血虚・陰虚火旺・肝鬱化火の観点で評価します。"},
+    "慢性疲労": {cat:"全身・体調", hp:"慢性疲労", medical:"慢性炎症、睡眠の質、ミトコンドリア疲労、血糖変動の影響を確認します。", tcm:"脾気虚・腎虚・気血両虚の観点で評価します。"},
+    "PMS": {cat:"婦人科・ホルモン", hp:"PMS", medical:"黄体期の自律神経変動、ホルモン変動、炎症反応を考慮します。", tcm:"肝鬱気滞・瘀血・脾虚の観点で評価します。"},
+    "冷え性": {cat:"循環器系", hp:"冷え性", medical:"末梢循環、筋ポンプ低下、交感神経性血管収縮を確認します。", tcm:"陽虚・血虚・瘀血の観点で評価します。"},
+    "アトピー性皮膚炎": {cat:"皮膚・免疫", hp:"アトピー", medical:"皮膚バリア、腸内環境、免疫過敏、慢性炎症を確認します。", tcm:"血熱・湿熱・脾虚湿盛の観点で評価します。"},
+    "過敏性腸症候群": {cat:"消化器", hp:"過敏性腸症候群", medical:"腸脳相関、内臓知覚過敏、腸管運動、自律神経バランスを確認します。", tcm:"肝脾不和・脾虚・気滞の観点で評価します。"},
+    "慢性便秘": {cat:"消化器", hp:"慢性便秘", medical:"腸管蠕動、骨盤底機能、水分摂取、交感神経緊張を確認します。", tcm:"気虚・血虚・腸燥・気滞の観点で評価します。"},
+    "起立性調節障害": {cat:"循環器系", hp:"起立性調節障害", medical:"血圧調節、静脈還流、交感神経反応、睡眠リズムを確認します。", tcm:"気血不足・腎虚・陽虚の観点で評価します。"},
+    "機能性ディスペプシア": {cat:"消化器", hp:"機能性ディスペプシア", medical:"胃運動、内臓知覚過敏、迷走神経機能、ストレス負荷を確認します。", tcm:"脾胃虚弱・肝胃不和・痰湿の観点で評価します。"},
+    "頭痛": {cat:"頭・神経系", hp:"頭痛", medical:"頸部筋緊張、血流調節、三叉神経血管系、睡眠負荷を確認します。", tcm:"肝陽上亢・瘀血・気血不足の観点で評価します。"},
+    "肩こり": {cat:"筋骨格", hp:"肩こり", medical:"僧帽筋・肩甲挙筋・後頭下筋群の過緊張、呼吸補助筋の負担を確認します。", tcm:"気滞血瘀・寒凝・肝鬱の観点で評価します。"},
+    "腰痛": {cat:"筋骨格", hp:"腰痛", medical:"腰背部筋膜、股関節可動性、腹圧、仙腸関節周囲の負担を確認します。", tcm:"腎虚・瘀血・寒湿の観点で評価します。"},
+    "膝痛": {cat:"筋骨格", hp:"膝痛", medical:"股関節・足関節連動、膝蓋大腿関節、下肢アライメントを確認します。", tcm:"腎虚・寒湿・瘀血の観点で評価します。"},
+    "足底筋膜炎": {cat:"筋骨格", hp:"足底筋膜炎", medical:"足底腱膜、下腿三頭筋、足部アーチ、荷重バランスを確認します。", tcm:"腎虚・瘀血・経絡停滞の観点で評価します。"},
+    "顎関節症": {cat:"頭・神経系", hp:"顎関節症", medical:"咬筋・側頭筋・胸鎖乳突筋、頸椎姿勢、ストレス性食いしばりを確認します。", tcm:"肝鬱気滞・胃経の緊張の観点で評価します。"},
+    "腱鞘炎": {cat:"筋骨格", hp:"腱鞘炎", medical:"前腕屈筋群・伸筋群、手関節アライメント、反復負荷を確認します。", tcm:"気血瘀滞・経絡阻滞の観点で評価します。"},
+    "外反母趾": {cat:"筋骨格", hp:"外反母趾", medical:"足部アーチ、母趾MTP関節、下腿・股関節の連動を確認します。", tcm:"腎虚・経絡停滞・瘀血の観点で評価します。"},
+    "息苦しさ": {cat:"呼吸・循環", hp:"息苦しさ", medical:"横隔膜、胸郭可動性、過換気傾向、交感神経緊張を確認します。", tcm:"気滞・気逆・肺気虚の観点で評価します。"},
+    "動悸": {cat:"呼吸・循環", hp:"動悸", medical:"交感神経興奮、血糖変動、睡眠不足、カフェイン影響を確認します。", tcm:"心血虚・気陰両虚・痰火擾心の観点で評価します。"},
+    "喉の違和感": {cat:"呼吸・循環", hp:"喉の違和感", medical:"咽喉頭緊張、頸部筋緊張、逆流・ストレス反応を確認します。", tcm:"梅核気・肝鬱気滞・痰気互結の観点で評価します。"}
+  };
+
+  function cleanText(s){
+    return (s || "").replace(/\s+/g, " ").trim();
+  }
+
+  function getCheckedSymptoms(){
+    const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked'));
+    const texts = [];
+    checked.forEach(el => {
+      let labelText = "";
+      const id = el.getAttribute("id");
+      if(id){
+        const label = document.querySelector('label[for="'+CSS.escape(id)+'"]');
+        if(label) labelText = cleanText(label.innerText);
+      }
+      if(!labelText){
+        const label = el.closest("label");
+        if(label) labelText = cleanText(label.innerText);
+      }
+      if(!labelText && el.value) labelText = cleanText(el.value);
+      Object.keys(symptomMeta).forEach(key => {
+        if(labelText.includes(key) && !texts.includes(key)) texts.push(key);
+      });
+    });
+
+    if(texts.length) return texts;
+
+    const bodyText = document.body.innerText || "";
+    return Object.keys(symptomMeta).filter(key => bodyText.includes(key) && /選択|チェック|項目|点|傾向|分析/.test(bodyText));
+  }
+
+  function getPatientMeta(){
+    const nameInput = document.querySelector('input[name*="name"], input[id*="name"], input[placeholder*="名前"], input[placeholder*="お名前"]');
+    const ageInput = document.querySelector('input[name*="age"], input[id*="age"], input[placeholder*="年齢"]');
+    const name = nameInput ? cleanText(nameInput.value) : "";
+    const age = ageInput ? cleanText(ageInput.value) : "";
+    const now = new Date();
+    const date = now.getFullYear()+"/"+String(now.getMonth()+1).padStart(2,"0")+"/"+String(now.getDate()).padStart(2,"0")+" "+String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+    return {name: name || "ゲスト", age: age || "-", date};
+  }
+
+  function categoryCounts(symptoms){
+    const counts = {};
+    symptoms.forEach(s => {
+      const cat = symptomMeta[s]?.cat || "その他";
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    return counts;
+  }
+
+  function scoreLevel(n){
+    if(n >= 16) return {score: 82, label:"重度"};
+    if(n >= 8) return {score: 58, label:"中度"};
+    if(n >= 3) return {score: 34, label:"軽度"};
+    return {score: 12, label:"低負担"};
+  }
+
+  function topSymptoms(symptoms){
+    return symptoms.slice(0,5);
+  }
+
+  function tendencyText(symptoms, counts){
+    const cats = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+    if(!symptoms.length) return "現在選択されている症状項目はありません。";
+    const main = cats.slice(0,3).join("・");
+    return `${main}の比率が高く、自律神経系・内臓機能・筋膜緊張が相互に影響している可能性があります。症状を単独で見るのではなく、睡眠、消化、循環、呼吸、姿勢負荷を合わせて評価します。`;
+  }
+
+  function medicalLines(symptoms){
+    const picked = symptoms.slice(0,6);
+    if(!picked.length) return [{label:"医学的評価", text:"症状選択後に、神経系・消化器系・循環器系・筋骨格系の関連を表示します。"}];
+    return picked.map(s => ({label:s, text:symptomMeta[s].medical}));
+  }
+
+  function tcmLines(symptoms){
+    const has = k => symptoms.includes(k);
+    const lines = [];
+    if(has("喉の違和感") || has("息苦しさ") || has("動悸") || has("パニック障害")) lines.push({label:"気の巡り（気滞・気逆）", text:"胸郭・横隔膜・頸部の緊張を整え、呼吸に伴う気の昇降を回復しやすい状態へ導きます。"});
+    if(has("慢性疲労") || has("慢性便秘") || has("機能性ディスペプシア") || has("過敏性腸症候群")) lines.push({label:"脾胃の弱り（脾虚・肝脾不和）", text:"腹部、横隔膜、背部の緊張を確認し、消化器への自律神経入力が安定しやすい状態を目指します。"});
+    if(has("冷え性") || has("耳鳴り") || has("腰痛") || has("膝痛")) lines.push({label:"腎の弱り（腎虚）", text:"骨盤帯、腰背部、下肢の循環と支持性を整え、冷えや慢性疲労に関わる土台を評価します。"});
+    if(has("頭痛") || has("肩こり") || has("めまい") || has("顎関節症")) lines.push({label:"肝の緊張（肝鬱・肝陽上亢）", text:"後頭下筋群、側頭部、頸肩部の過緊張をゆるめ、頭頸部の血流・神経刺激を落ち着かせます。"});
+    if(has("アトピー性皮膚炎")) lines.push({label:"湿熱・血熱", text:"皮膚症状は腸内環境、睡眠、ストレス、炎症負荷と合わせて確認します。"});
+    if(!lines.length) lines.push({label:"全身調整", text:"呼吸・姿勢・循環・消化の反応を確認し、気血水の偏りを総合的に見立てます。"});
+    return lines.slice(0,5);
+  }
+
+  function lifestyleLines(symptoms){
+    const lines = [];
+    if(symptoms.some(s => ["不眠症","パニック障害","動悸","息苦しさ"].includes(s))) lines.push({label:"睡眠・呼吸", text:"就寝90分前の入浴、寝る直前のスマホ・PCを控える、吐く息を長くする呼吸を取り入れます。"});
+    if(symptoms.some(s => ["過敏性腸症候群","慢性便秘","機能性ディスペプシア","アトピー性皮膚炎"].includes(s))) lines.push({label:"食事・消化", text:"よく噛む、夕食を遅くしない、発酵食品・食物繊維・水分摂取を意識します。"});
+    if(symptoms.some(s => ["冷え性","起立性調節障害","めまい","慢性疲労"].includes(s))) lines.push({label:"循環・体温", text:"朝日を浴びる、足首を冷やさない、軽い歩行で下肢の筋ポンプを使います。"});
+    if(symptoms.some(s => ["肩こり","腰痛","膝痛","足底筋膜炎","顎関節症","腱鞘炎","外反母趾"].includes(s))) lines.push({label:"姿勢・運動", text:"同じ姿勢を長時間続けず、胸郭・股関節・足首の可動性を保つ軽い運動を行います。"});
+    if(!lines.length) lines.push({label:"生活リズム", text:"睡眠、食事、運動、呼吸の基本リズムを整えることを優先します。"});
+    return lines;
+  }
+
+  function foodLines(symptoms){
+    const sugarRel = symptoms.some(s => ["動悸","パニック障害","不眠症","慢性疲労","肩こり","頭痛","慢性便秘","アトピー性皮膚炎"].includes(s));
+    const wheatRel = symptoms.some(s => ["過敏性腸症候群","機能性ディスペプシア","慢性便秘","アトピー性皮膚炎","慢性疲労","頭痛","肩こり"].includes(s));
+    const dairyRel = symptoms.some(s => ["過敏性腸症候群","機能性ディスペプシア","慢性便秘","アトピー性皮膚炎","慢性疲労","頭痛","肩こり"].includes(s));
+
+    return [
+      {label:"砂糖", text: sugarRel ? "血糖値の急上昇・急降下に伴うアドレナリン分泌、交感神経興奮、腸内環境の乱れを確認します。甘味は完全禁止ではなく、頻度を見直し、きび砂糖・甜菜糖・黒砂糖などへの置き換えを候補にします。" : "強い関連は目立ちませんが、血糖変動と睡眠・気分・疲労感の関係は確認します。"},
+      {label:"小麦", text: wheatRel ? "グルテンによる腸粘膜負担、腸管バリア低下、免疫・自律神経への影響を確認します。連日のパン・麺・揚げ物を避け、米・玄米・雑穀・米粉食品への置き換えを候補にします。" : "強い関連は目立ちませんが、連日摂取や体調不良時の摂取量を確認します。"},
+      {label:"乳製品", text: dairyRel ? "乳糖分解負担、カゼインによる腸粘膜負担、軽い炎症反応の可能性を確認します。牛乳・ヨーグルト・チーズの頻度と摂取後の体調を確認し、豆乳・アーモンドミルク・小魚・海藻・味噌などを候補にします。" : "強い関連は目立ちませんが、摂取後のお腹の張り、下痢、だるさ、皮膚症状の変化を確認します。"}
+    ];
+  }
+
+  function drawPrintChart(canvas, counts, total){
+    if(!canvas || !canvas.getContext) return;
+    const ctx = canvas.getContext("2d");
+    const dpr = 2;
+    const size = 320;
+    canvas.width = size*dpr;
+    canvas.height = size*dpr;
+    ctx.scale(dpr,dpr);
+    ctx.clearRect(0,0,size,size);
+
+    const entries = Object.entries(counts);
+    if(!entries.length){
+      ctx.beginPath();
+      ctx.arc(size/2,size/2,95,0,Math.PI*2);
+      ctx.strokeStyle="#999";
+      ctx.lineWidth=28;
+      ctx.stroke();
+      return;
+    }
+    const shades = ["#333","#666","#888","#aaa","#c8c8c8","#dedede","#b5b5b5","#777"];
+    let start = -Math.PI/2;
+    entries.forEach(([cat,n],i)=>{
+      const angle = (n/total)*Math.PI*2;
+      ctx.beginPath();
+      ctx.arc(size/2,size/2,95,start,start+angle);
+      ctx.strokeStyle = shades[i % shades.length];
+      ctx.lineWidth = 32;
+      ctx.stroke();
+      start += angle;
+    });
+    ctx.beginPath();
+    ctx.arc(size/2,size/2,56,0,Math.PI*2);
+    ctx.fillStyle="#fff";
+    ctx.fill();
+    ctx.fillStyle="#111";
+    ctx.textAlign="center";
+    ctx.font="bold 30px sans-serif";
+    ctx.fillText(String(total), size/2, size/2+3);
+    ctx.font="12px sans-serif";
+    ctx.fillText("項目", size/2, size/2+24);
+  }
+
+  function buildBars(counts,total){
+    const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+    return entries.map(([cat,n])=>{
+      const pct = total ? Math.round(n/total*100) : 0;
+      return `<div class="gene-print-bar-row"><span>${cat}</span><div class="gene-print-bar-track"><div class="gene-print-bar-fill" style="width:${pct}%"></div></div><span>${pct}%</span></div>`;
+    }).join("");
+  }
+
+  function buildReport(){
+    const target = document.getElementById("geneA4PrintReport");
+    if(!target) return;
+
+    const symptoms = getCheckedSymptoms();
+    const counts = categoryCounts(symptoms);
+    const total = symptoms.length;
+    const lv = scoreLevel(total);
+    const meta = getPatientMeta();
+    const top = topSymptoms(symptoms);
+    const cats = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+    const med = medicalLines(symptoms);
+    const tcm = tcmLines(symptoms);
+    const life = lifestyleLines(symptoms);
+    const food = foodLines(symptoms);
+
+    target.innerHTML = `
+      <div class="gene-print-header">
+        <div>
+          <h1 class="gene-print-title">総合分析レポート</h1>
+          <div class="gene-print-subtitle">大阪 自律神経専門整体院 gene｜問診チェック結果</div>
+        </div>
+        <div class="gene-print-meta">
+          診断日：${meta.date}<br>
+          お名前：${meta.name} 様<br>
+          年齢：${meta.age}
+        </div>
+      </div>
+
+      <div class="gene-print-grid-top">
+        <section class="gene-print-card">
+          <h2>① 集計結果</h2>
+          <div class="gene-print-chart-row">
+            <div>
+              <div class="gene-print-score"><strong>${lv.score}</strong><span>/100点</span></div>
+              <span class="gene-print-badge">${lv.label}</span>
+              <p class="gene-print-small">合計チェック数：${total}項目</p>
+            </div>
+            <div class="gene-print-chart-wrap"><canvas id="genePrintDonutChart"></canvas></div>
+          </div>
+          <div class="gene-print-bars">${buildBars(counts,total)}</div>
+        </section>
+
+        <section class="gene-print-card">
+          <h2>② 詳細分析</h2>
+          ${top.length ? top.map((s,i)=>`<div class="gene-print-rank"><span>${i+1}位</span><span>${s}</span><span>${symptomMeta[s]?.cat || ""}</span></div>`).join("") : `<p>選択項目はありません。</p>`}
+          <h3>選択された項目</h3>
+          <p class="gene-print-small">${symptoms.length ? symptoms.join("、") : "なし"}</p>
+        </section>
+      </div>
+
+      <div class="gene-print-grid-2">
+        <section class="gene-print-card is-soft">
+          <h2>③ 今回の傾向</h2>
+          <p>${tendencyText(symptoms, counts)}</p>
+          <p class="gene-print-small">重点カテゴリ：${cats.length ? cats.slice(0,3).join("、") : "なし"}</p>
+        </section>
+
+        <section class="gene-print-card is-soft">
+          <h2>④ 医学的レポート</h2>
+          ${med.map(x=>`<div class="gene-print-report-line"><div class="gene-print-report-label">${x.label}</div><div>${x.text}</div></div>`).join("")}
+        </section>
+      </div>
+
+      <div class="gene-print-grid-2">
+        <section class="gene-print-card">
+          <h2>⑤ 東洋医学的レポート</h2>
+          ${tcm.map(x=>`<div class="gene-print-report-line"><div class="gene-print-report-label">${x.label}</div><div>${x.text}</div></div>`).join("")}
+        </section>
+
+        <section class="gene-print-card">
+          <h2>⑥ 生活習慣アドバイス</h2>
+          ${life.map(x=>`<div class="gene-print-report-line"><div class="gene-print-report-label">${x.label}</div><div>${x.text}</div></div>`).join("")}
+        </section>
+      </div>
+
+      <section class="gene-print-card">
+        <h2>⑦ 砂糖・小麦・乳製品との関連</h2>
+        ${food.map(x=>`<div class="gene-print-food"><div class="gene-print-food-title">${x.label}</div><div>${x.text}</div></div>`).join("")}
+      </section>
+
+      <div class="gene-print-note">
+        ※本レポートは医療上の診断・治療を行うものではありません。強い症状や急な不調がある場合は医療機関へご相談ください。施術では、身体の中（内臓・自律神経）と外（筋肉・骨格・筋膜）の両面から状態を確認します。
+      </div>
+      <div class="gene-print-footer">大阪 自律神経専門整体院 gene</div>
+    `;
+
+    setTimeout(()=>drawPrintChart(document.getElementById("genePrintDonutChart"), counts, Math.max(total,1)), 30);
+  }
+
+  window.geneBuildA4PrintReport = buildReport;
+  window.addEventListener("beforeprint", buildReport);
+  if (window.matchMedia) {
+    const media = window.matchMedia("print");
+    if(media && media.addEventListener){
+      media.addEventListener("change", e => { if(e.matches) buildReport(); });
+    }
+  }
+  document.addEventListener("DOMContentLoaded", buildReport);
+})();

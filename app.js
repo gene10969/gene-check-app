@@ -1298,11 +1298,68 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     return counts;
   }
 
-  function scoreLevel(n){
-    if(n >= 16) return {score: 82, label:"重度"};
-    if(n >= 8) return {score: 58, label:"中度"};
-    if(n >= 3) return {score: 34, label:"軽度"};
-    return {score: 12, label:"低負担"};
+  function getScreenScoreAndLevel(){
+    const body = document.body ? document.body.innerText : "";
+    const patterns = [
+      /総合スコア\s*([0-9]{1,3})\s*(?:点)?\s*[\r\n\s]*(軽度|中度|重度|低負担)?/,
+      /([0-9]{1,3})\s*(?:\/\s*100\s*点|点)\s*[\r\n\s]*(軽度|中度|重度|低負担)?/
+    ];
+
+    for(const p of patterns){
+      const m = body.match(p);
+      if(m){
+        const score = Math.max(0, Math.min(100, parseInt(m[1],10)));
+        const label = m[2] || scoreToLevel(score);
+        return {score, label};
+      }
+    }
+    return null;
+  }
+
+  function scoreToLevel(score){
+    if(score >= 75) return "重度";
+    if(score >= 40) return "中度";
+    if(score >= 15) return "軽度";
+    return "低負担";
+  }
+
+  function weightedScore(symptoms){
+    const weights = {
+      "パニック障害": 5,
+      "不眠症": 5,
+      "動悸": 5,
+      "息苦しさ": 5,
+      "起立性調節障害": 5,
+      "めまい": 4,
+      "過敏性腸症候群": 4,
+      "機能性ディスペプシア": 4,
+      "アトピー性皮膚炎": 4,
+      "慢性疲労": 4,
+      "頭痛": 3,
+      "耳鳴り": 3,
+      "PMS": 3,
+      "慢性便秘": 3,
+      "冷え性": 3,
+      "喉の違和感": 3,
+      "肩こり": 2,
+      "腰痛": 2,
+      "膝痛": 2,
+      "顎関節症": 2,
+      "腱鞘炎": 2,
+      "足底筋膜炎": 2,
+      "外反母趾": 2
+    };
+
+    const max = 70;
+    const raw = symptoms.reduce((sum, s) => sum + (weights[s] || 2), 0);
+    const score = Math.max(0, Math.min(100, Math.round((raw / max) * 100)));
+    return {score, label: scoreToLevel(score)};
+  }
+
+  function scoreLevel(n, symptoms){
+    const screen = getScreenScoreAndLevel();
+    if(screen) return screen;
+    return weightedScore(symptoms || []);
   }
 
   function topSymptoms(symptoms){
@@ -1395,7 +1452,7 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     ctx.font="bold 24px sans-serif";
     ctx.fillText(String(total), size/2, size/2+3);
     ctx.font="10px sans-serif";
-    ctx.fillText("項目", size/2, size/2+20);
+    ctx.fillText("症状数", size/2, size/2+20);
   }
 
   function buildBars(counts,total){
@@ -1413,7 +1470,7 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
     const symptoms = getCheckedSymptoms();
     const counts = categoryCounts(symptoms);
     const total = symptoms.length;
-    const lv = scoreLevel(total);
+    const lv = scoreLevel(total, symptoms);
     const meta = getPatientMeta();
     const top = topSymptoms(symptoms);
     const cats = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
@@ -1438,9 +1495,11 @@ try { console.log('gene admin lock final fix loaded'); } catch (e) {}
           <h2>① 集計結果</h2>
           <div class="gene-print-chart-row">
             <div>
-              <div class="gene-print-score"><strong>${lv.score}</strong><span>/100点</span></div>
-              <span class="gene-print-badge">${lv.label}</span>
-              <p class="gene-print-small">合計チェック数：${total}項目</p>
+              <div class="gene-print-score-summary">
+                <div class="gene-print-mini-metric"><span>症状数</span><strong>${total}</strong><em>項目</em></div>
+                <div class="gene-print-mini-metric"><span>総合スコア</span><strong>${lv.score}</strong><em>点</em></div>
+                <div class="gene-print-mini-metric"><span>自律神経負担</span><strong class="is-level">${lv.label}</strong></div>
+              </div>
             </div>
             <div class="gene-print-chart-wrap"><canvas id="genePrintDonutChart"></canvas></div>
           </div>

@@ -1333,3 +1333,79 @@ button::after {
     display: none !important;
   }
 }
+
+
+
+/* =========================================================
+   SCORE UNIFICATION PRINT PATCH
+   症状数 / 総合スコア / 自律神経負担 を統一表示
+========================================================= */
+
+@media print {
+  .gene-print-score-summary {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: .8mm !important;
+    align-content: center !important;
+  }
+
+  .gene-print-mini-metric {
+    border: 1px solid #d7d7d7 !important;
+    border-radius: 1.2mm !important;
+    padding: .65mm .8mm !important;
+    background: #ffffff !important;
+    line-height: 1.05 !important;
+  }
+
+  .gene-print-mini-metric span {
+    display: block !important;
+    font-size: 4.7pt !important;
+    color: #555 !important;
+    margin-bottom: .25mm !important;
+  }
+
+  .gene-print-mini-metric strong {
+    font-size: 10.8pt !important;
+    line-height: 1 !important;
+    color: #111 !important;
+  }
+
+  .gene-print-mini-metric strong.is-level {
+    font-size: 8.4pt !important;
+  }
+
+  .gene-print-mini-metric em {
+    font-style: normal !important;
+    font-size: 5pt !important;
+    margin-left: .5mm !important;
+    color: #333 !important;
+  }
+
+  .gene-print-chart-row {
+    grid-template-columns: 24mm 23mm 1fr !important;
+  }
+
+  .gene-print-chart-wrap {
+    display: block !important;
+    width: 22mm !important;
+    height: 22mm !important;
+  }
+
+  .gene-print-chart-wrap canvas {
+    display: block !important;
+    width: 22mm !important;
+    height: 22mm !important;
+    max-width: 22mm !important;
+    max-height: 22mm !important;
+  }
+
+  .gene-a4-print-report {
+    max-height: 184mm !important;
+  }
+
+  .gene-print-note,
+  .gene-print-footer {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

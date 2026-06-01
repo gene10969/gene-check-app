@@ -827,3 +827,46 @@ button::after {
     min-height: 20px;
   }
 }
+
+
+/* medical / TCM analysis extension */
+.symptom-link-list,
+.print-symptom-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.symptom-link-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 12px;
+  border:1px solid rgba(217,193,126,.45);
+  border-radius:999px;
+  color:#f5e7bd;
+  background:rgba(217,193,126,.08);
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.4;
+}
+.symptom-link-chip:hover{
+  border-color:rgba(217,193,126,.8);
+  background:rgba(217,193,126,.16);
+}
+.clinical-block p{
+  line-height:1.9;
+}
+@media print{
+  .symptom-link-list,
+  .print-symptom-links{
+    gap:4px;
+  }
+  .symptom-link-chip{
+    color:#000 !important;
+    background:#fff !important;
+    border:1px solid #999 !important;
+    padding:3px 7px !important;
+    border-radius:12px !important;
+    font-size:10.5pt !important;
+  }
+}

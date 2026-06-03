@@ -27,7 +27,7 @@
     <div class="patient-grid">
       <label class="field">
         <span>お名前</span>
-        <input id="patientName" type="text" placeholder="必須">
+        <textarea id="patientName" class="privacy-input" rows="1" wrap="off" placeholder="必須" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="none" data-lpignore="true" data-form-type="other"></textarea>
       </label>
       <label class="field">
         <span>日付</span>
@@ -62,7 +62,7 @@
       <div id="adminLockedView" class="admin-locked-view">
         <p class="admin-note">保存済み患者検索・保存済み患者・患者データを保存・JSON書き出し・JSON読み込み・集計を見る は管理者専用です。</p>
         <div class="admin-auth-row">
-          <input id="adminPassword" class="admin-password-input" type="password" placeholder="管理者パスワード" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
+          <input id="adminPassword" class="admin-password-input" type="password" placeholder="管理者パスワード" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="none" data-lpignore="true" data-form-type="other">
           <button id="adminUnlockBtn" class="btn btn-sub" type="button">開く</button>
         </div>
         <p id="adminAuthStatus" class="admin-auth-status">ロック中</p>
@@ -78,7 +78,7 @@
     <div id="adminToolbar" class="toolbar-grid" hidden>
       <label class="field search-field">
         <span>保存済み患者検索</span>
-        <input id="patientSearch" type="text" placeholder="名前を入力">
+        <textarea id="patientSearch" class="privacy-input" rows="1" wrap="off" placeholder="名前を入力" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="none" data-lpignore="true" data-form-type="other"></textarea>
       </label>
       <div class="saved-panel">
         <div class="saved-head"><span>保存済み患者</span></div>
@@ -237,6 +237,36 @@
   </div>
 </section>
 
+
+<script>
+(function(){
+  function hardenPrivacyInput(el, prefix){
+    if (!el) return;
+    const uniqueName = prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2);
+    el.setAttribute('name', uniqueName);
+    el.setAttribute('autocomplete', 'new-password');
+    el.setAttribute('autocorrect', 'off');
+    el.setAttribute('autocapitalize', 'off');
+    el.setAttribute('spellcheck', 'false');
+    el.setAttribute('aria-autocomplete', 'none');
+    el.setAttribute('data-lpignore', 'true');
+    el.setAttribute('data-form-type', 'other');
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        el.blur();
+      }
+    });
+  }
+  function applyPrivacyHardening(){
+    hardenPrivacyInput(document.getElementById('patientName'), 'gene_private_patient');
+    hardenPrivacyInput(document.getElementById('patientSearch'), 'gene_private_search');
+    hardenPrivacyInput(document.getElementById('adminPassword'), 'gene_private_admin');
+  }
+  document.addEventListener('DOMContentLoaded', applyPrivacyHardening);
+  window.addEventListener('pageshow', applyPrivacyHardening);
+})();
+</script>
 <script src="app.js?v=20260507-stable"></script>
 <script>
 window.addEventListener('load', function(){

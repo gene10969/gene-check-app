@@ -11,7 +11,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon-192.png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="style.css?v=20260713-json-filename-fix">
+  <link rel="stylesheet" href="style.css?v=20260713-checkdate-ui-fix">
 </head>
 <body>
 <div class="splash" id="splash"><div class="splash-inner"></div></div>
@@ -19,7 +19,7 @@
   <header class="hero">
     <div class="title-wrap">
       <h1>問診チェック</h1>
-      <p class="lead">気になる症状をタップしてください。保存・比較機能付きで運用できます。</p>
+      <p class="lead">気になる症状をタップしてください。</p>
     </div>
   </header>
 
@@ -27,10 +27,10 @@
     <div class="patient-grid">
       <label class="field">
         <span>お名前</span>
-        <textarea id="patientName" class="privacy-input" rows="1" wrap="off" placeholder="必須" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="none" data-lpignore="true" data-form-type="other"></textarea>
+        <div class="name-input-wrap"><textarea id="patientName" class="privacy-input" rows="1" wrap="off" placeholder="必須" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" aria-autocomplete="none" data-lpignore="true" data-form-type="other"></textarea><span class="name-suffix" aria-hidden="true">様</span></div>
       </label>
       <label class="field">
-        <span>日付</span>
+        <span>チェック日</span>
         <input id="visitDate" type="date">
       </label>
     </div>
@@ -104,13 +104,13 @@
 
     <div class="result-grid">
       <div class="result-box"><small>お名前</small><strong id="resultName">-</strong></div>
-      <div class="result-box"><small>日付</small><strong id="resultDate">-</strong></div>
+      <div class="result-box"><small>チェック日</small><strong id="resultDate">-</strong></div>
       <div class="result-box"><small>合計チェック数</small><strong id="resultTotal">0</strong></div>
       <div class="result-box"><small>自動判定</small><strong id="resultSeverity">軽度</strong></div>
     </div>
 
     <div class="compare-grid">
-      <div class="compare-box"><small>前回日付</small><strong id="prevDate">-</strong></div>
+      <div class="compare-box"><small>前回チェック日</small><strong id="prevDate">-</strong></div>
       <div class="compare-box"><small>前回選択数</small><strong id="prevTotal">-</strong></div>
       <div class="compare-box"><small>増減</small><strong id="diffTotal">-</strong></div>
       <div class="compare-box"><small>比較評価</small><strong id="diffLabel">初回</strong></div>
@@ -179,7 +179,7 @@
 
     <div class="print-basic-grid">
       <div><span>お名前</span><strong id="printName">-</strong></div>
-      <div><span>日付</span><strong id="printDate">-</strong></div>
+      <div><span>チェック日</span><strong id="printDate">-</strong></div>
       <div><span>合計チェック数</span><strong id="printTotal">0</strong></div>
       <div><span>判定</span><strong id="printSeverity">-</strong></div>
     </div>
@@ -218,7 +218,7 @@
     <section class="print-section">
       <h2>前回比較</h2>
       <div class="print-compare-grid">
-        <div><span>前回日付</span><strong id="printPrevDate">-</strong></div>
+        <div><span>前回チェック日</span><strong id="printPrevDate">-</strong></div>
         <div><span>前回選択数</span><strong id="printPrevTotal">-</strong></div>
         <div><span>増減</span><strong id="printDiffTotal">-</strong></div>
         <div><span>比較評価</span><strong id="printDiffLabel">-</strong></div>
@@ -267,7 +267,7 @@
   window.addEventListener('pageshow', applyPrivacyHardening);
 })();
 </script>
-<script src="app.js?v=20260713-json-filename-fix"></script>
+<script src="app.js?v=20260713-checkdate-ui-fix"></script>
 <script>
 window.addEventListener('load', function(){
   setTimeout(function(){

@@ -1778,3 +1778,38 @@ button::after {
     display: none !important;
   }
 }
+
+
+/* =========================================================
+   CHECK DATE / NAME SUFFIX UI PATCH 2026-07-13
+   管理者操作・保存・JSON処理には影響させず、表示だけを調整
+========================================================= */
+.name-input-wrap{
+  position:relative;
+  width:100%;
+}
+.name-input-wrap .privacy-input{
+  padding-right:52px !important;
+}
+.name-suffix{
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--text);
+  font-size:18px;
+  line-height:1;
+  pointer-events:none;
+  opacity:.95;
+}
+@media (max-width:640px){
+  .name-suffix{
+    right:16px;
+    font-size:17px;
+  }
+}
+@media print{
+  .name-suffix{
+    display:none !important;
+  }
+}

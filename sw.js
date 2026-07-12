@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-summary-card-fix-v1';
+const CACHE_NAME = 'gene-check-print-font-final-v1';
 const ASSETS = [
   './',
   './index.html',

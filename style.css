@@ -3132,3 +3132,44 @@ button::after {
     line-height:1.16 !important;
   }
 }
+
+
+/* =========================================================
+   PRINT TOP OFFSET / NOTE LINE BREAK FIX 2026-07-13-F
+   ・印刷時に最上部タイトルが切れないよう、A4印刷範囲を少し下げる
+   ・注意書き内の「施術では、〜」を確実に改行
+   ・ご紹介カード内の指定は変更しない
+========================================================= */
+@media print{
+  @page{
+    size:A4 landscape;
+    margin:6.8mm 4.5mm 4.5mm 4.5mm;
+  }
+
+  html,
+  body{
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .gene-a4-print-report{
+    height:198.2mm !important;
+    max-height:198.2mm !important;
+    padding-top:1.9mm !important;
+    overflow:hidden !important;
+  }
+
+  .gene-print-header{
+    margin-top:0 !important;
+    padding-top:0 !important;
+  }
+
+  .gene-print-note-main,
+  .gene-print-note-treatment{
+    display:block !important;
+  }
+
+  .gene-print-note-treatment{
+    margin-top:.35mm !important;
+  }
+}

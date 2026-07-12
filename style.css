@@ -2776,3 +2776,65 @@ button::after {
     print-color-adjust:exact !important;
   }
 }
+
+
+/* =========================================================
+   FINAL PRINT REFINEMENT 2026-07-13-B
+   ご紹介カード文言改行・④⑤文字サイズ拡大・注意書き下揃え
+========================================================= */
+@media print{
+  .gene-print-card-lifestyle,
+  .gene-print-food-card{
+    font-size:8.25pt !important;
+    line-height:1.26 !important;
+  }
+
+  .gene-print-card-lifestyle h2,
+  .gene-print-food-card h2{
+    font-size:9.65pt !important;
+    line-height:1.14 !important;
+    margin-bottom:1.45mm !important;
+  }
+
+  .gene-print-card-lifestyle .gene-print-report-line,
+  .gene-print-food-card .gene-print-food{
+    font-size:8.25pt !important;
+    line-height:1.28 !important;
+  }
+
+  .gene-print-card-lifestyle .gene-print-report-label,
+  .gene-print-food-card .gene-print-food-title{
+    font-size:8.35pt !important;
+    line-height:1.18 !important;
+  }
+
+  .gene-print-card-lifestyle{
+    min-height:25mm !important;
+  }
+
+  .gene-print-food-card{
+    margin-right:96mm !important;
+    min-height:49mm !important;
+    padding-bottom:2.6mm !important;
+  }
+
+  .gene-print-note{
+    position:absolute !important;
+    left:0 !important;
+    right:96mm !important;
+    bottom:4.2mm !important;
+    margin:0 !important;
+    max-width:none !important;
+    font-size:6.05pt !important;
+    line-height:1.16 !important;
+    z-index:5 !important;
+  }
+
+  .gene-referral-card .gene-referral-message br{
+    display:block !important;
+  }
+
+  .gene-referral-message span{
+    white-space:nowrap !important;
+  }
+}

@@ -11,8 +11,7 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
               <div><span>ご紹介された方</span><strong>初回 500円OFF</strong></div>
               <div><span>ご紹介者さま</span><strong>次回 500円OFF</strong></div>
             </div>
-            <p class="gene-referral-message">LINE予約時に「○○さんの紹介です」とお伝えください。</p>
-            <div class="gene-referral-sign">大阪 自律神経専門整体院 gene</div>
+            <p class="gene-referral-message"><span>LINE予約時に「○○さんの紹介です」</span><br><span>とお伝えください。</span></p>
           </div>
           <div class="gene-referral-qrbox">
             <div class="gene-referral-qrlabel">LINEで相談・予約</div>

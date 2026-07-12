@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-referral-card-final-layout-v1';
+const CACHE_NAME = 'gene-check-message-font-fix-v1';
 const ASSETS = [
   './',
   './index.html',

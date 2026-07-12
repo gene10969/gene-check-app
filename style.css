@@ -2930,3 +2930,73 @@ button::after {
     color:#333333 !important;
   }
 }
+
+/* =========================================================
+   PRINT FONT / REFERRAL STORE NAME FIX 2026-07-13-D
+   ①②③を④⑤と同等の読みやすい文字サイズへ統一
+   ご紹介カード内に店舗名を復帰
+========================================================= */
+@media print{
+  .gene-print-summary-card,
+  .gene-print-related-card,
+  .gene-print-tendency-card{
+    font-size:8.25pt !important;
+    line-height:1.26 !important;
+  }
+
+  .gene-print-summary-card h2,
+  .gene-print-related-card h2,
+  .gene-print-tendency-card h2{
+    font-size:9.65pt !important;
+    line-height:1.14 !important;
+    margin-bottom:1.45mm !important;
+  }
+
+  .gene-print-related-card .gene-print-rank,
+  .gene-print-tendency-card p,
+  .gene-print-related-card .gene-print-small,
+  .gene-print-summary-card .gene-print-small{
+    font-size:8.25pt !important;
+    line-height:1.28 !important;
+  }
+
+  .gene-print-summary-card .gene-print-bar-row{
+    font-size:7.85pt !important;
+    line-height:1.16 !important;
+    grid-template-columns:24mm 1fr 8mm !important;
+    gap:.9mm !important;
+  }
+
+  .gene-print-summary-card .gene-print-bars{
+    gap:.55mm !important;
+    margin-top:.75mm !important;
+  }
+
+  .gene-print-summary-card .gene-print-bar-track{
+    height:1.85mm !important;
+  }
+
+  .gene-print-score-note,
+  .gene-print-related-note{
+    font-size:7.1pt !important;
+    line-height:1.18 !important;
+  }
+
+  .gene-referral-main{
+    grid-template-areas:
+      "title heading benefits"
+      "lead lead benefits"
+      "message message benefits"
+      "sign sign benefits" !important;
+  }
+
+  .gene-referral-sign{
+    display:block !important;
+    grid-area:sign !important;
+    margin-top:.25mm !important;
+    font-size:5.75pt !important;
+    line-height:1.05 !important;
+    color:#333333 !important;
+    white-space:nowrap !important;
+  }
+}

@@ -1840,3 +1840,193 @@ button::after {
     page-break-inside:avoid !important;
   }
 }
+
+
+/* =========================================================
+   REFERRAL CARD PRINT PATCH 2026-07-13
+   印刷下部の余白に、切り取り式のご紹介カードを追加
+   QR周辺は白背景、ロゴ透かしは切り取り線内のみ
+========================================================= */
+@media screen{
+  .gene-referral-cut{
+    display:none !important;
+  }
+}
+@media print{
+  .gene-referral-cut{
+    display:block !important;
+    margin-top:1.35mm !important;
+    padding-top:1.35mm !important;
+    border-top:1px dashed #888888 !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  .gene-referral-cutline{
+    margin:0 0 .9mm !important;
+    text-align:center !important;
+    font-size:5.2pt !important;
+    line-height:1 !important;
+    letter-spacing:.08em !important;
+    color:#666666 !important;
+  }
+
+  .gene-referral-card{
+    position:relative !important;
+    display:grid !important;
+    grid-template-columns:1fr 25mm !important;
+    gap:2.1mm !important;
+    min-height:25mm !important;
+    padding:1.8mm 2.15mm !important;
+    border:1px solid #bcbcbc !important;
+    border-radius:1.6mm !important;
+    overflow:hidden !important;
+    background:#ffffff !important;
+  }
+
+  .gene-referral-watermark{
+    position:absolute !important;
+    left:18mm !important;
+    top:50% !important;
+    width:82mm !important;
+    max-width:82mm !important;
+    height:auto !important;
+    transform:translateY(-50%) !important;
+    opacity:.055 !important;
+    z-index:0 !important;
+    pointer-events:none !important;
+  }
+
+  .gene-referral-main,
+  .gene-referral-qrbox{
+    position:relative !important;
+    z-index:1 !important;
+  }
+
+  .gene-referral-main{
+    display:grid !important;
+    grid-template-columns:29mm 1fr 58mm !important;
+    grid-template-areas:
+      "title heading benefits"
+      "lead lead benefits"
+      "message message benefits"
+      "sign sign benefits" !important;
+    column-gap:2.2mm !important;
+    row-gap:.55mm !important;
+    align-items:center !important;
+  }
+
+  .gene-referral-title{
+    grid-area:title !important;
+    font-size:9.2pt !important;
+    line-height:1.05 !important;
+    font-weight:700 !important;
+    letter-spacing:.06em !important;
+    color:#111111 !important;
+    white-space:nowrap !important;
+  }
+
+  .gene-referral-heading{
+    grid-area:heading !important;
+    font-size:6.55pt !important;
+    line-height:1.05 !important;
+    font-weight:700 !important;
+    color:#111111 !important;
+  }
+
+  .gene-referral-main p{
+    margin:0 !important;
+    font-size:5.65pt !important;
+    line-height:1.24 !important;
+    color:#222222 !important;
+  }
+
+  .gene-referral-main p:first-of-type{
+    grid-area:lead !important;
+  }
+
+  .gene-referral-message{
+    grid-area:message !important;
+    font-weight:700 !important;
+  }
+
+  .gene-referral-benefits{
+    grid-area:benefits !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:1.2mm !important;
+  }
+
+  .gene-referral-benefits div{
+    padding:1.15mm 1mm !important;
+    border:1px solid #cfcfcf !important;
+    border-radius:1.15mm !important;
+    background:rgba(255,255,255,.92) !important;
+    text-align:center !important;
+  }
+
+  .gene-referral-benefits span{
+    display:block !important;
+    margin-bottom:.45mm !important;
+    font-size:5.25pt !important;
+    line-height:1.05 !important;
+    color:#333333 !important;
+  }
+
+  .gene-referral-benefits strong{
+    display:block !important;
+    font-size:8.15pt !important;
+    line-height:1.05 !important;
+    color:#111111 !important;
+  }
+
+  .gene-referral-sign{
+    grid-area:sign !important;
+    font-size:5.65pt !important;
+    line-height:1.05 !important;
+    color:#333333 !important;
+  }
+
+  .gene-referral-qrbox{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:.55mm !important;
+    padding:1mm .8mm !important;
+    border:1px solid #d4d4d4 !important;
+    border-radius:1.1mm !important;
+    background:#ffffff !important;
+  }
+
+  .gene-referral-qrlabel{
+    font-size:5.5pt !important;
+    line-height:1 !important;
+    font-weight:700 !important;
+    color:#111111 !important;
+    white-space:nowrap !important;
+  }
+
+  .gene-referral-qr{
+    width:18mm !important;
+    height:18mm !important;
+    display:block !important;
+    background:#ffffff !important;
+    padding:0 !important;
+  }
+
+  .gene-referral-url{
+    font-size:4.8pt !important;
+    line-height:1 !important;
+    color:#444444 !important;
+    white-space:nowrap !important;
+  }
+
+  .gene-referral-card br{
+    display:inline !important;
+  }
+
+  .gene-print-note + .gene-referral-cut + .gene-print-footer{
+    margin-top:.45mm !important;
+  }
+}

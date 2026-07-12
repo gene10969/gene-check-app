@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-20260713-score-related-labels';
+const CACHE_NAME = 'gene-check-20260713-referral-card-print';
 const ASSETS = [
   './',
   './index.html',
@@ -8,7 +8,9 @@ const ASSETS = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './bg.png',
-  './logo-full.png'
+  './logo-full.png',
+  './gene-referral-watermark.png',
+  './line-qr.png'
 ];
 
 self.addEventListener('install', event => {

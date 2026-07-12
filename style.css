@@ -1338,7 +1338,7 @@ button::after {
 
 /* =========================================================
    SCORE UNIFICATION PRINT PATCH
-   症状数 / 総合スコア / 自律神経負担 を統一表示
+   症状数 / 負担スコア / 自律神経負担 を統一表示
 ========================================================= */
 
 @media print {
@@ -1811,5 +1811,32 @@ button::after {
 @media print{
   .name-suffix{
     display:none !important;
+  }
+}
+
+
+/* =========================================================
+   SCORE / RELATED LABEL CLARITY PATCH 2026-07-13
+   負担スコアは低いほど軽いこと、関連項目は主訴順位ではないことを明示
+========================================================= */
+.gene-print-score-note,
+.gene-print-related-note{
+  margin:.4mm 0 0 !important;
+  font-size:5.2pt !important;
+  line-height:1.08 !important;
+  color:#444444 !important;
+}
+@media screen{
+  .gene-print-score-note,
+  .gene-print-related-note{
+    display:none !important;
+  }
+}
+@media print{
+  .gene-print-score-note,
+  .gene-print-related-note{
+    display:block !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
   }
 }

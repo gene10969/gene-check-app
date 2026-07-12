@@ -11,7 +11,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon-192.png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="style.css?v=20260713-checkdate-ui-fix">
+  <link rel="stylesheet" href="style.css?v=20260713-score-related-labels">
 </head>
 <body>
 <div class="splash" id="splash"><div class="splash-inner"></div></div>
@@ -123,7 +123,7 @@
 
     <div class="chart-card">
       <div class="section-head mini">
-        <h3>詳細分析</h3>
+        <h3>関連して確認したい項目</h3>
         <p>丸形チャート / 自律神経との関連</p>
       </div>
       <div class="analysis-grid">
@@ -133,7 +133,7 @@
         <div class="analysis-text">
           <div class="analysis-block">
             <h4>今回の傾向</h4>
-            <p id="analysisSummary">選択された項目から、自律神経との関連を整理して表示します。</p>
+            <p id="analysisSummary">チェックされた項目から、自律神経との関連を整理して表示します。</p>
           </div>
           <div class="analysis-block">
             <h4>重点カテゴリ</h4>
@@ -157,7 +157,7 @@
 
     <div class="selected-card">
       <div class="section-head mini">
-        <h3>選択された項目</h3>
+        <h3>今回チェックされた項目</h3>
         <p id="selectedMeta">0件</p>
       </div>
       <div id="selectedList" class="selected-list"></div>
@@ -227,7 +227,7 @@
     </section>
 
     <section class="print-section">
-      <h2>選択された項目一覧</h2>
+      <h2>今回チェックされた項目一覧</h2>
       <div id="printSelectedItems" class="print-selected-items"></div>
     </section>
 
@@ -267,7 +267,7 @@
   window.addEventListener('pageshow', applyPrivacyHardening);
 })();
 </script>
-<script src="app.js?v=20260713-checkdate-ui-fix"></script>
+<script src="app.js?v=20260713-score-related-labels"></script>
 <script>
 window.addEventListener('load', function(){
   setTimeout(function(){

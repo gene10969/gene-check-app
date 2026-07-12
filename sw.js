@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-referral-business-card-print-v1';
+const CACHE_NAME = 'gene-check-referral-cutline-qr-watermark-v1';
 const ASSETS = [
   './',
   './index.html',

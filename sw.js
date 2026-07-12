@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-referral-cutline-qr-watermark-v1';
+const CACHE_NAME = 'gene-check-referral-right-bottom-card-v1';
 const ASSETS = [
   './',
   './index.html',
@@ -8,9 +8,7 @@ const ASSETS = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './bg.png',
-  './logo-full.png',
-  './gene-referral-watermark.png',
-  './line-qr.png'
+  './logo-full.png'
 ];
 
 self.addEventListener('install', event => {

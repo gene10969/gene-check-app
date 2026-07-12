@@ -2030,3 +2030,179 @@ button::after {
     margin-top:.45mm !important;
   }
 }
+
+
+/* =========================================================
+   REFERRAL BUSINESS CARD PRINT LAYOUT PATCH 2026-07-13
+   ④医学的レポート削除後の余白を使い、ご紹介カードを名刺比率で再配置
+========================================================= */
+@media print{
+  .gene-a4-print-report{
+    max-height:201mm !important;
+    font-size:6.55pt !important;
+    line-height:1.12 !important;
+  }
+
+  .gene-print-grid-tendency{
+    grid-template-columns:1fr !important;
+  }
+
+  .gene-print-card-wide{
+    min-height:18mm !important;
+  }
+
+  .gene-print-card h2{
+    font-size:7.65pt !important;
+  }
+
+  .gene-print-card p,
+  .gene-a4-print-report p{
+    font-size:6.55pt !important;
+    line-height:1.13 !important;
+  }
+
+  .gene-print-note{
+    margin-top:.75mm !important;
+    padding-top:.55mm !important;
+  }
+
+  .gene-referral-cut{
+    margin-top:1.65mm !important;
+    padding-top:1.65mm !important;
+    border-top:1px dashed #777777 !important;
+  }
+
+  .gene-referral-cutline{
+    margin:0 0 1.05mm !important;
+    font-size:5.45pt !important;
+    letter-spacing:.1em !important;
+  }
+
+  .gene-referral-card{
+    width:91mm !important;
+    height:55mm !important;
+    min-height:55mm !important;
+    max-width:91mm !important;
+    margin:0 auto !important;
+    display:grid !important;
+    grid-template-columns:1fr 26mm !important;
+    gap:3.4mm !important;
+    padding:4mm !important;
+    border:1.1px solid #444444 !important;
+    border-radius:2.2mm !important;
+    background:#ffffff !important;
+    overflow:hidden !important;
+  }
+
+  .gene-referral-watermark{
+    left:4.5mm !important;
+    top:50% !important;
+    width:64mm !important;
+    max-width:64mm !important;
+    transform:translateY(-50%) rotate(-2deg) !important;
+    opacity:.045 !important;
+  }
+
+  .gene-referral-main{
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:space-between !important;
+    min-width:0 !important;
+    height:100% !important;
+    row-gap:0 !important;
+    column-gap:0 !important;
+  }
+
+  .gene-referral-title{
+    font-size:11.2pt !important;
+    line-height:1.05 !important;
+    letter-spacing:.08em !important;
+    margin:0 0 1.2mm !important;
+  }
+
+  .gene-referral-heading{
+    font-size:7.2pt !important;
+    line-height:1.15 !important;
+    margin:0 0 1.1mm !important;
+  }
+
+  .gene-referral-main p{
+    font-size:6.35pt !important;
+    line-height:1.42 !important;
+    margin:0 !important;
+  }
+
+  .gene-referral-message{
+    margin-top:1.4mm !important;
+    font-size:6.35pt !important;
+    line-height:1.28 !important;
+    font-weight:700 !important;
+  }
+
+  .gene-referral-benefits{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:1.6mm !important;
+    margin:1.7mm 0 1.3mm !important;
+  }
+
+  .gene-referral-benefits div{
+    padding:1.35mm 1mm !important;
+    border:1px solid #bdbdbd !important;
+    border-radius:1.3mm !important;
+    background:rgba(255,255,255,.94) !important;
+  }
+
+  .gene-referral-benefits span{
+    margin-bottom:.55mm !important;
+    font-size:5.55pt !important;
+    line-height:1.08 !important;
+  }
+
+  .gene-referral-benefits strong{
+    font-size:8.65pt !important;
+    line-height:1.05 !important;
+  }
+
+  .gene-referral-sign{
+    font-size:5.8pt !important;
+    line-height:1.08 !important;
+  }
+
+  .gene-referral-qrbox{
+    align-self:stretch !important;
+    width:26mm !important;
+    min-width:26mm !important;
+    padding:1.7mm 1.2mm !important;
+    border:1px solid #c8c8c8 !important;
+    border-radius:1.4mm !important;
+    background:#ffffff !important;
+  }
+
+  .gene-referral-qrlabel{
+    font-size:5.7pt !important;
+    line-height:1.1 !important;
+    text-align:center !important;
+  }
+
+  .gene-referral-qr{
+    width:22mm !important;
+    height:22mm !important;
+    min-width:22mm !important;
+    min-height:22mm !important;
+    max-width:22mm !important;
+    max-height:22mm !important;
+    object-fit:contain !important;
+    image-rendering:auto !important;
+  }
+
+  .gene-referral-url{
+    margin-top:.6mm !important;
+    font-size:4.95pt !important;
+    line-height:1.05 !important;
+  }
+
+  .gene-referral-card br{
+    display:inline !important;
+  }
+}

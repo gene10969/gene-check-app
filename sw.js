@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-20260713-referral-card-print';
+const CACHE_NAME = 'gene-check-referral-business-card-print-v1';
 const ASSETS = [
   './',
   './index.html',

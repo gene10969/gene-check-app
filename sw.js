@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-obfuscated-level2-v20260602';
+const CACHE_NAME = 'gene-check-obfuscated-level2-v20260713-json-print-fix';
 const ASSETS = [
   './',
   './index.html',

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-title-note-fix-v1';
+const CACHE_NAME = 'gene-check-checkdate-no-time-v1';
 const ASSETS = [
   './',
   './index.html',

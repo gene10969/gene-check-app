@@ -3173,3 +3173,68 @@ button::after {
     margin-top:.35mm !important;
   }
 }
+
+
+/* =========================================================
+   TWO A4 PRINT REPORTS FINAL 2026-07-22
+   ・1枚目：ご紹介カード付き
+   ・2枚目：院内保管用・ご紹介カードなし
+   ・画面UIには影響しない
+========================================================= */
+@media print{
+  .gene-a4-print-report{
+    display:block !important;
+    width:288mm !important;
+    max-width:288mm !important;
+    height:auto !important;
+    max-height:none !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    overflow:visible !important;
+    background:#fff !important;
+  }
+
+  .gene-a4-print-page{
+    display:block !important;
+    box-sizing:border-box !important;
+    width:288mm !important;
+    max-width:288mm !important;
+    height:198.2mm !important;
+    max-height:198.2mm !important;
+    margin:0 auto !important;
+    padding:1.9mm 0 0 0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+    color:#111 !important;
+    page-break-after:always !important;
+    break-after:page !important;
+    page-break-inside:avoid !important;
+    break-inside:avoid !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  .gene-a4-print-page:last-child{
+    page-break-after:auto !important;
+    break-after:auto !important;
+  }
+
+  .gene-a4-print-page .gene-print-header{
+    margin-top:0 !important;
+    padding-top:0 !important;
+  }
+
+  .gene-a4-print-page-internal .gene-referral-cut{
+    display:none !important;
+  }
+
+  .gene-print-internal-tag{
+    display:block !important;
+    margin-top:.35mm !important;
+    font-size:5.85pt !important;
+    line-height:1.15 !important;
+    font-weight:700 !important;
+    color:#555 !important;
+  }
+}

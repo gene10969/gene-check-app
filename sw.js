@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-two-report-print-v1';
+const CACHE_NAME = 'gene-check-two-report-print-reversed-v1';
 const ASSETS = [
   './',
   './index.html',

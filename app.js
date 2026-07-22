@@ -27,8 +27,8 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
 
 /* =========================================================
    PRINT TWO REPORTS 2026-07-22
-   1枚目：ご紹介カード付き患者さま用
-   2枚目：ご紹介カードなし院内保管用
+   1枚目：ご紹介カードなし院内保管用
+   2枚目：ご紹介カード付き患者さま用
    ※画面UI/UX・保存・JSON処理には影響させない
 ========================================================= */
 (function(){
@@ -62,11 +62,11 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
     const internalHtml = removeReferralCardFromHtml(patientHtml);
 
     root.innerHTML =
-      '<section class="gene-a4-print-page gene-a4-print-page-patient" aria-label="患者さま用レポート">' +
-        patientHtml +
-      '</section>' +
       '<section class="gene-a4-print-page gene-a4-print-page-internal" aria-label="院内保管用レポート">' +
         internalHtml +
+      '</section>' +
+      '<section class="gene-a4-print-page gene-a4-print-page-patient" aria-label="患者さま用レポート">' +
+        patientHtml +
       '</section>';
   }
 

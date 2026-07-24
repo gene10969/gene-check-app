@@ -3238,3 +3238,29 @@ button::after {
     color:#555 !important;
   }
 }
+
+
+/* =========================================================
+   REFERRAL POLICY WORDING PATCH 2026-07-24
+   紹介特典の税込価格・継続サポート利用中の適用時期を明確化
+========================================================= */
+@media print{
+  .gene-referral-benefits strong{
+    font-size:7.15pt !important;
+    letter-spacing:-.02em !important;
+  }
+
+  .gene-referral-message{
+    font-size:5.15pt !important;
+    line-height:1.16 !important;
+  }
+
+  .gene-referral-policy{
+    display:inline-block !important;
+    margin-top:.35mm !important;
+    font-size:4.45pt !important;
+    line-height:1.12 !important;
+    color:#444444 !important;
+    white-space:normal !important;
+  }
+}

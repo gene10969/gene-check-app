@@ -8,25 +8,10 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
             <div class="gene-referral-heading">大切な方へ</div>
             <p>自律神経の乱れ、睡眠、疲労感、めまい、<span class="gene-referral-nobr">皮膚症状などでお悩みの方</span>がいらっしゃいましたら、ご相談ください。</p>
             <div class="gene-referral-benefits">
-              <div>
-                <span>ご紹介された初回の方</span>
-                <strong>
-                  <span class="gene-referral-benefit-price">2,800円</span>
-                  <span class="gene-referral-benefit-tax">（税込）</span>
-                </strong>
-              </div>
-              <div>
-                <span>ご紹介者さま</span>
-                <strong>
-                  <span class="gene-referral-benefit-payment">次回のお支払い</span>
-                  <span class="gene-referral-benefit-discount">500円OFF</span>
-                </strong>
-              </div>
+              <div><span>ご紹介された方</span><strong>初回 500円OFF</strong></div>
+              <div><span>ご紹介者さま</span><strong>次回 500円OFF</strong></div>
             </div>
-            <p class="gene-referral-message">
-              <span class="gene-referral-message-main">LINE予約時に<br>「○○さんの紹介です」とお伝えください。</span>
-              <span class="gene-referral-policy">※継続サポート利用中は次回購入時等に適用。<br>購入済み分への遡及適用・返金はできません。</span>
-            </p>
+            <p class="gene-referral-message"><span>LINE予約時に「○○さんの紹介です」</span><br><span>とお伝えください。</span></p>
             <div class="gene-referral-sign">大阪 自律神経専門整体院 gene</div>
           </div>
           <div class="gene-referral-qrbox">
@@ -41,9 +26,9 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
 
 
 /* =========================================================
-   PRINT TWO REPORTS 2026-07-22
-   1枚目：ご紹介カードなし院内保管用
-   2枚目：ご紹介カード付き患者さま用
+   PRINT TWO REPORTS 2026-08-11
+   1枚目：ご紹介カード付き患者さま用
+   2枚目：ご紹介カードなし院内保管用
    ※画面UI/UX・保存・JSON処理には影響させない
 ========================================================= */
 (function(){
@@ -77,11 +62,11 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
     const internalHtml = removeReferralCardFromHtml(patientHtml);
 
     root.innerHTML =
-      '<section class="gene-a4-print-page gene-a4-print-page-internal" aria-label="院内保管用レポート">' +
-        internalHtml +
-      '</section>' +
       '<section class="gene-a4-print-page gene-a4-print-page-patient" aria-label="患者さま用レポート">' +
         patientHtml +
+      '</section>' +
+      '<section class="gene-a4-print-page gene-a4-print-page-internal" aria-label="院内保管用レポート">' +
+        internalHtml +
       '</section>';
   }
 

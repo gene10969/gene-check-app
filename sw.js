@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-20260812-print-page-belonging-final';
+const CACHE_NAME = 'gene-check-20260812-print-page-absolute-position-fix';
 const ASSETS = [
   './',
   './index.html',

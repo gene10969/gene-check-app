@@ -3261,3 +3261,34 @@ button::after {
     display:none !important;
   }
 }
+
+/* =========================================================
+   PRINT PAGE ABSOLUTE POSITION FIX 2026-08-12
+   ・文章/文字/本文は変更しない
+   ・紹介カードと下部注意文の絶対配置を各A4ページ内に固定
+   ・1枚目の患者さま用にだけ紹介カード/注意文を表示
+   ・2枚目の院内保管用では紹介カード/注意文を非表示
+========================================================= */
+@media print{
+  .gene-a4-print-page{
+    position:relative !important;
+  }
+
+  .gene-a4-print-page-patient .gene-referral-cut,
+  .gene-a4-print-page-patient .gene-print-note{
+    display:block !important;
+  }
+
+  .gene-a4-print-page-internal .gene-referral-cut,
+  .gene-a4-print-page-internal .gene-print-note{
+    display:none !important;
+  }
+
+  .gene-a4-print-page-patient .gene-print-internal-tag{
+    display:none !important;
+  }
+
+  .gene-a4-print-page-internal .gene-print-internal-tag{
+    display:block !important;
+  }
+}

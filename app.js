@@ -24,52 +24,42 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
 
     `,function(e,t,n){if(!e||!e.getContext)return;const a=e.getContext("2d");e.width=520,e.height=520,a.scale(2,2),a.clearRect(0,0,260,260);const i=Object.entries(t);if(!i.length)return a.beginPath(),a.arc(130,130,95,0,2*Math.PI),a.strokeStyle="#999",a.lineWidth=28,void a.stroke();const s=["#333","#666","#888","#aaa","#c8c8c8","#dedede","#b5b5b5","#777"];let r=-Math.PI/2;i.forEach(([e,t],i)=>{const o=t/n*Math.PI*2;a.beginPath(),a.arc(130,130,78,r,r+o),a.strokeStyle=s[i%s.length],a.lineWidth=24,a.stroke(),r+=o}),a.beginPath(),a.arc(130,130,45,0,2*Math.PI),a.fillStyle="#fff",a.fill(),a.fillStyle="#111",a.textAlign="center",a.font="bold 24px sans-serif",a.fillText(String(n),130,133),a.font="10px sans-serif",a.fillText("症状数",130,150)}(document.getElementById("genePrintDonutChart"),r,Math.max(o,1))}if(window.geneBuildA4PrintReport=i,window.addEventListener("beforeprint",i),window.matchMedia){const e=window.matchMedia("print");e&&e.addEventListener&&e.addEventListener("change",e=>{e.matches&&i()})}document.addEventListener("DOMContentLoaded",i)}();
 
+
 /* =========================================================
-   PRINT TWO REPORTS 2026-08-11 PATIENT FIRST TRUE SWAP
-   1枚目：患者さま用・ご紹介カード付き
-   2枚目：院内保管用・ご紹介カードなし
-   ※ラベルだけでなく印刷内容そのものを固定順で生成する
+   PRINT TWO REPORTS 2026-08-12
+   1枚目：ご紹介カード付き患者さま用
+   2枚目：ご紹介カードなし院内保管用
    ※画面UI/UX・保存・JSON処理には影響させない
 ========================================================= */
 (function(){
-  const singleReportBuilder = window.geneBuildA4PrintReport;
+  const originalBuilder = window.geneBuildA4PrintReport;
 
-  function addInternalTag(html){
+  function removeReferralCardFromHtml(html){
     const wrap = document.createElement('div');
     wrap.innerHTML = html || '';
-
     const referral = wrap.querySelector('.gene-referral-cut');
     if (referral) referral.remove();
 
     const meta = wrap.querySelector('.gene-print-meta');
-    if (meta) {
-      const oldTags = meta.querySelectorAll('.gene-print-internal-tag');
-      oldTags.forEach(tag => tag.remove());
+    if (meta && !meta.querySelector('.gene-print-internal-tag')) {
       meta.insertAdjacentHTML('beforeend', '<span class="gene-print-internal-tag">院内保管用</span>');
     }
 
     return wrap.innerHTML;
   }
 
-  function stripInternalTag(html){
-    const wrap = document.createElement('div');
-    wrap.innerHTML = html || '';
-    wrap.querySelectorAll('.gene-print-internal-tag').forEach(tag => tag.remove());
-    return wrap.innerHTML;
-  }
-
   function buildTwoPagePrintReport(){
     const root = document.getElementById('geneA4PrintReport');
-    if (!root || typeof singleReportBuilder !== 'function') return;
+    if (!root) return;
 
-    root.innerHTML = '';
-    singleReportBuilder();
+    if (typeof originalBuilder === 'function') {
+      originalBuilder();
+    }
 
-    const singleHtml = (root.innerHTML || '').trim();
-    if (!singleHtml) return;
+    const patientHtml = (root.innerHTML || '').trim();
+    if (!patientHtml) return;
 
-    const patientHtml = stripInternalTag(singleHtml);
-    const internalHtml = addInternalTag(singleHtml);
+    const internalHtml = removeReferralCardFromHtml(patientHtml);
 
     root.innerHTML =
       '<section class="gene-a4-print-page gene-a4-print-page-patient" aria-label="患者さま用レポート">' +
@@ -82,7 +72,6 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
 
   window.geneBuildA4PrintReport = buildTwoPagePrintReport;
   window.addEventListener('beforeprint', buildTwoPagePrintReport);
-
   if (window.matchMedia) {
     const media = window.matchMedia('print');
     if (media && media.addEventListener) {
@@ -91,6 +80,5 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
       });
     }
   }
-
   document.addEventListener('DOMContentLoaded', buildTwoPagePrintReport);
 })();

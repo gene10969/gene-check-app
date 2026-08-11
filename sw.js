@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-print-order-patient-first-only-v1';
+const CACHE_NAME = 'gene-check-20260812-print-order-final';
 const ASSETS = [
   './',
   './index.html',

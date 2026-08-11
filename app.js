@@ -26,19 +26,23 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
 
 
 /* =========================================================
-   PRINT TWO REPORTS 2026-07-22
-   1枚目：ご紹介カード付き患者さま用
-   2枚目：ご紹介カードなし院内保管用
-   ※画面UI/UX・保存・JSON処理には影響させない
+   PRINT TWO REPORTS 2026-08-12
+   1枚目：患者さま用（ご紹介カード・下部注意文あり）
+   2枚目：院内保管用（ご紹介カード・下部注意文なし）
+   ※文章・文字・レイアウト本体は変更せず、印刷ページの内容振り分けのみ調整
 ========================================================= */
 (function(){
   const originalBuilder = window.geneBuildA4PrintReport;
 
-  function removeReferralCardFromHtml(html){
+  function buildInternalHtmlFromPatientHtml(html){
     const wrap = document.createElement('div');
     wrap.innerHTML = html || '';
+
     const referral = wrap.querySelector('.gene-referral-cut');
     if (referral) referral.remove();
+
+    const note = wrap.querySelector('.gene-print-note');
+    if (note) note.remove();
 
     const meta = wrap.querySelector('.gene-print-meta');
     if (meta && !meta.querySelector('.gene-print-internal-tag')) {
@@ -59,7 +63,7 @@ const categories=[{name:"全身・体調",items:["慢性的に疲れやすい","
     const patientHtml = (root.innerHTML || '').trim();
     if (!patientHtml) return;
 
-    const internalHtml = removeReferralCardFromHtml(patientHtml);
+    const internalHtml = buildInternalHtmlFromPatientHtml(patientHtml);
 
     root.innerHTML =
       '<section class="gene-a4-print-page gene-a4-print-page-patient" aria-label="患者さま用レポート">' +

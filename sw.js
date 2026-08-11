@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-20260812-print-order-final';
+const CACHE_NAME = 'gene-check-20260812-print-page-belonging-final';
 const ASSETS = [
   './',
   './index.html',

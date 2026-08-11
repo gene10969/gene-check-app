@@ -3238,3 +3238,26 @@ button::after {
     color:#555 !important;
   }
 }
+
+
+/* =========================================================
+   PRINT PAGE CONTENT GUARD 2026-08-12
+   ・患者さま用だけに紹介カード・下部注意文を表示
+   ・院内保管用では紹介カード・下部注意文を非表示
+   ・既存本文や文字は変更しない
+========================================================= */
+@media print{
+  .gene-a4-print-page-patient .gene-referral-cut,
+  .gene-a4-print-page-patient .gene-print-note{
+    display:block !important;
+  }
+
+  .gene-a4-print-page-internal .gene-referral-cut,
+  .gene-a4-print-page-internal .gene-print-note{
+    display:none !important;
+  }
+
+  .gene-a4-print-page-patient .gene-print-internal-tag{
+    display:none !important;
+  }
+}

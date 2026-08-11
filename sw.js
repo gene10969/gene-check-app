@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gene-check-patient-first-content-swap-v1';
+const CACHE_NAME = 'gene-check-patient-first-true-v1';
 const ASSETS = [
   './',
   './index.html',
